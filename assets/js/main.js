@@ -1,20 +1,51 @@
 (function () {
-  const navItems = [
+  const leadingNavItems = [
     { label: "Home", href: "index.html" },
     { label: "About", href: "about.html" },
-    { label: "Services", href: "services.html" },
-    { label: "Projects", href: "projects.html" },
+  ];
+
+  const trailingNavItems = [
     { label: "Contact", href: "contact.html" },
+  ];
+
+  const servicesItems = [
+    "Fire Sprinkler System Design",
+    "Fire Safety Plans & Training",
+    "Fire Code Consulting",
+    "Fire Inspection Order Support",
+  ];
+
+  const projectsItems = [
+    "Healthcare",
+    "Commercial",
+    "Industrial",
+    "Residential",
+    "Institutional",
   ];
 
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
 
   function renderHeader(target) {
-    const links = navItems
+    const leadingLinks = leadingNavItems
       .map((item) => {
         const current = item.href === currentPage ? ' aria-current="page"' : "";
         return `<a class="nav-link" href="${item.href}"${current}>${item.label}</a>`;
       })
+      .join("");
+
+    const trailingLinks = trailingNavItems
+      .map((item) => {
+        const current = item.href === currentPage ? ' aria-current="page"' : "";
+        return `<a class="nav-link" href="${item.href}"${current}>${item.label}</a>`;
+      })
+      .join("");
+
+    const servicesMenu = servicesItems
+      .map((label) => `<a href="services.html">${label}</a>`)
+      .join("");
+
+    const projectsMenu = projectsItems
+      .map((label) => `<a href="projects.html">${label}</a>`)
       .join("");
 
     target.innerHTML = `
@@ -28,7 +59,21 @@
             <span class="visually-hidden">Menu</span>
           </button>
           <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation">
-            ${links}
+            ${leadingLinks}
+            <div class="nav-dropdown">
+              <button class="dropdown-toggle" type="button" aria-expanded="false">Services</button>
+              <div class="dropdown-menu">
+                ${servicesMenu}
+              </div>
+            </div>
+            <div class="nav-dropdown">
+              <button class="dropdown-toggle" type="button" aria-expanded="false">Projects</button>
+              <div class="dropdown-menu">
+                ${projectsMenu}
+              </div>
+            </div>
+            ${trailingLinks}
+            <a class="nav-link nav-cta" href="contact.html">Request a Consultation</a>
           </nav>
         </div>
       </header>
@@ -41,13 +86,26 @@
     target.innerHTML = `
       <footer class="site-footer">
         <div class="footer-shell">
-          <span>&copy; ${year} StellarFPC. All rights reserved.</span>
-          <nav class="footer-links" aria-label="Footer navigation">
-            <a href="about.html">About</a>
-            <a href="services.html">Services</a>
-            <a href="projects.html">Projects</a>
-            <a href="contact.html">Contact</a>
-          </nav>
+          <section class="footer-column" aria-labelledby="footer-contact">
+            <img class="footer-brand-logo" src="assets/images/stellarfpc-logo-horizontal.png" alt="StellarFPC">
+            <h2 id="footer-contact">Contact</h2>
+            <p>Professional fire protection engineering, code consulting, and fire safety solutions throughout Ontario.</p>
+          </section>
+          <section class="footer-column" aria-labelledby="footer-links">
+            <h3 id="footer-links">Quick Links</h3>
+            <nav class="footer-links" aria-label="Footer navigation">
+              <a href="index.html">Home</a>
+              <a href="about.html">About</a>
+              <a href="services.html">Services</a>
+              <a href="projects.html">Projects</a>
+              <a href="contact.html">Contact</a>
+            </nav>
+          </section>
+          <section class="footer-column" aria-labelledby="footer-email">
+            <h3 id="footer-email">Email</h3>
+            <a href="mailto:info@stellarfpc.ca">info@stellarfpc.ca</a>
+          </section>
+          <div class="footer-bottom">&copy; ${year} StellarFPC. All rights reserved.</div>
         </div>
       </footer>
     `;
@@ -65,6 +123,22 @@
       const expanded = toggle.getAttribute("aria-expanded") === "true";
       toggle.setAttribute("aria-expanded", String(!expanded));
       nav.classList.toggle("is-open", !expanded);
+    });
+  }
+
+  function bindDropdowns() {
+    document.querySelectorAll(".dropdown-toggle").forEach((toggle) => {
+      const dropdown = toggle.closest(".nav-dropdown");
+
+      if (!dropdown) {
+        return;
+      }
+
+      toggle.addEventListener("click", () => {
+        const expanded = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!expanded));
+        dropdown.classList.toggle("is-open", !expanded);
+      });
     });
   }
 
@@ -98,5 +172,6 @@
   document.querySelectorAll("[data-component='site-header']").forEach(renderHeader);
   document.querySelectorAll("[data-component='site-footer']").forEach(renderFooter);
   bindNavigation();
+  bindDropdowns();
   bindRevealAnimation();
 })();
