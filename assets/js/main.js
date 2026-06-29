@@ -142,6 +142,21 @@
     });
   }
 
+  function bindHeaderScrollState() {
+    const header = document.querySelector(".site-header");
+
+    if (!header) {
+      return;
+    }
+
+    function updateHeaderState() {
+      header.classList.toggle("is-scrolled", window.scrollY > 12);
+    }
+
+    updateHeaderState();
+    window.addEventListener("scroll", updateHeaderState, { passive: true });
+  }
+
   function bindRevealAnimation() {
     const elements = document.querySelectorAll(".reveal-on-scroll");
 
@@ -173,5 +188,6 @@
   document.querySelectorAll("[data-component='site-footer']").forEach(renderFooter);
   bindNavigation();
   bindDropdowns();
+  bindHeaderScrollState();
   bindRevealAnimation();
 })();
