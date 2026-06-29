@@ -1,0 +1,13 @@
+{
+  "name": "stellarfpc-website",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Static HTML, CSS, and JavaScript website for StellarFPC.",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
