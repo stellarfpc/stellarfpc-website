@@ -21,8 +21,7 @@
       <header class="site-header">
         <div class="nav-shell">
           <a class="brand" href="index.html" aria-label="StellarFPC home">
-            <span class="brand-mark" aria-hidden="true">SF</span>
-            <span>StellarFPC</span>
+            <img class="brand-logo" src="assets/images/stellarfpc-logo-horizontal.png" alt="StellarFPC">
           </a>
           <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
             <span class="nav-toggle-lines" aria-hidden="true"></span>
@@ -69,7 +68,35 @@
     });
   }
 
+  function bindRevealAnimation() {
+    const elements = document.querySelectorAll(".reveal-on-scroll");
+
+    if (!elements.length) {
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.12 }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+  }
+
   document.querySelectorAll("[data-component='site-header']").forEach(renderHeader);
   document.querySelectorAll("[data-component='site-footer']").forEach(renderFooter);
   bindNavigation();
+  bindRevealAnimation();
 })();
