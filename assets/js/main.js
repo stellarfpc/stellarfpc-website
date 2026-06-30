@@ -73,7 +73,7 @@
               </div>
             </div>
             ${trailingLinks}
-            <a class="nav-link nav-cta" href="contact.html">Request a Consultation</a>
+            <a class="nav-link nav-cta" href="contact.html">Request Consultation</a>
           </nav>
         </div>
       </header>
@@ -88,8 +88,8 @@
         <div class="footer-shell">
           <section class="footer-column" aria-labelledby="footer-contact">
             <img class="footer-brand-logo" src="assets/images/stellarfpc-logo-horizontal.png" alt="StellarFPC">
-            <h2 id="footer-contact">Contact</h2>
-            <p>Fire protection engineering and code consulting support throughout Ontario.</p>
+            <h2 id="footer-contact">StellarFPC</h2>
+            <p>Fire protection engineering and code consulting solutions across Ontario.</p>
           </section>
           <section class="footer-column" aria-labelledby="footer-links">
             <h3 id="footer-links">Quick Links</h3>
@@ -104,14 +104,24 @@
           <section class="footer-column" aria-labelledby="footer-services">
             <h3 id="footer-services">Services</h3>
             <nav class="footer-links" aria-label="Footer services navigation">
-              <a href="services.html">Sprinkler Design</a>
-              <a href="services.html">Fire Safety Plans</a>
+              <a href="services.html">Fire Sprinkler System Design</a>
+              <a href="services.html">Fire Safety Plans &amp; Training</a>
               <a href="services.html">Code Consulting</a>
               <a href="services.html">Inspection Order Support</a>
             </nav>
           </section>
+          <section class="footer-column" aria-labelledby="footer-experience">
+            <h3 id="footer-experience">Project Experience</h3>
+            <nav class="footer-links" aria-label="Footer project experience navigation">
+              <a href="projects.html">Healthcare</a>
+              <a href="projects.html">Commercial</a>
+              <a href="projects.html">Industrial</a>
+              <a href="projects.html">Residential</a>
+              <a href="projects.html">Institutional</a>
+            </nav>
+          </section>
           <section class="footer-column" aria-labelledby="footer-email">
-            <h3 id="footer-email">Email</h3>
+            <h3 id="footer-email">Contact</h3>
             <a href="mailto:info@stellarfpc.com">info@stellarfpc.com</a>
           </section>
           <div class="footer-bottom">&copy; ${year} StellarFPC. All rights reserved.</div>
