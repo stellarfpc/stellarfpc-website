@@ -89,7 +89,7 @@
           <section class="footer-column" aria-labelledby="footer-contact">
             <img class="footer-brand-logo" src="assets/images/stellarfpc-logo-horizontal.png" alt="StellarFPC">
             <h2 id="footer-contact">Contact</h2>
-            <p>Professional fire protection engineering, code consulting, and fire safety solutions throughout Ontario.</p>
+            <p>Fire protection engineering and code consulting support throughout Ontario.</p>
           </section>
           <section class="footer-column" aria-labelledby="footer-links">
             <h3 id="footer-links">Quick Links</h3>
@@ -101,9 +101,18 @@
               <a href="contact.html">Contact</a>
             </nav>
           </section>
+          <section class="footer-column" aria-labelledby="footer-services">
+            <h3 id="footer-services">Services</h3>
+            <nav class="footer-links" aria-label="Footer services navigation">
+              <a href="services.html">Sprinkler Design</a>
+              <a href="services.html">Fire Safety Plans</a>
+              <a href="services.html">Code Consulting</a>
+              <a href="services.html">Inspection Order Support</a>
+            </nav>
+          </section>
           <section class="footer-column" aria-labelledby="footer-email">
             <h3 id="footer-email">Email</h3>
-            <a href="mailto:info@stellarfpc.ca">info@stellarfpc.ca</a>
+            <a href="mailto:info@stellarfpc.com">info@stellarfpc.com</a>
           </section>
           <div class="footer-bottom">&copy; ${year} StellarFPC. All rights reserved.</div>
         </div>
