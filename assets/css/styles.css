@@ -1444,6 +1444,146 @@ p {
   background: var(--color-surface);
 }
 
+.project-intro-section {
+  padding-block: clamp(3rem, 6vw, 4.5rem);
+  background: linear-gradient(180deg, #ffffff, #f6faff);
+}
+
+.project-intro-card {
+  max-width: 900px;
+  padding: clamp(1.35rem, 3vw, 2rem);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-blue);
+  border-radius: 8px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.project-intro-card h2 {
+  color: var(--color-navy);
+}
+
+.project-intro-card p:not(.eyebrow) {
+  max-width: 760px;
+  margin-top: 0.75rem;
+  color: var(--color-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.sprinkler-project-section {
+  padding-block: clamp(3.25rem, 6vw, 5rem);
+  background: var(--color-surface);
+}
+
+.sprinkler-project-list {
+  display: grid;
+  gap: 1.15rem;
+  margin-top: clamp(1.5rem, 4vw, 2.35rem);
+}
+
+.sprinkler-project-card {
+  display: grid;
+  grid-template-columns: minmax(18rem, 0.9fr) minmax(0, 1fr);
+  gap: clamp(1.2rem, 4vw, 2.4rem);
+  align-items: stretch;
+  overflow: hidden;
+  min-height: clamp(18rem, 28vw, 24rem);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-subtle);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.sprinkler-project-card:hover,
+.sprinkler-project-card:focus-within {
+  border-color: rgba(0, 87, 217, 0.34);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-3px);
+}
+
+.sprinkler-project-card img {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  min-height: 18rem;
+  object-fit: cover;
+  filter: saturate(0.98) contrast(1.04);
+}
+
+.sprinkler-project-card > div {
+  display: grid;
+  align-content: center;
+  min-width: 0;
+  padding: clamp(1.3rem, 4vw, 2.4rem);
+}
+
+.sprinkler-project-card h3,
+.service-project-card h3 {
+  color: var(--color-navy);
+}
+
+.sprinkler-project-card h3 {
+  font-size: clamp(1.55rem, 2.8vw, 2.25rem);
+}
+
+.sprinkler-project-card p,
+.service-project-card p {
+  margin-top: 0.7rem;
+  color: var(--color-muted);
+  line-height: 1.55;
+}
+
+.service-project-section {
+  padding-block: clamp(3.25rem, 6vw, 5rem);
+  background:
+    linear-gradient(rgba(0, 87, 217, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 87, 217, 0.04) 1px, transparent 1px),
+    var(--color-surface-soft);
+  background-size: 38px 38px, 38px 38px, auto;
+  border-top: 1px solid var(--color-border);
+}
+
+.service-project-section-alt {
+  background: var(--color-surface);
+}
+
+.service-project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: clamp(1.5rem, 4vw, 2.35rem);
+}
+
+.service-project-card {
+  overflow: hidden;
+  min-width: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-subtle);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.service-project-card:hover,
+.service-project-card:focus-within {
+  border-color: rgba(0, 87, 217, 0.34);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-3px);
+}
+
+.service-project-card img {
+  width: 100%;
+  height: clamp(11rem, 18vw, 14rem);
+  object-fit: cover;
+  background: var(--color-surface-blue);
+}
+
+.service-project-card > div {
+  padding: 1.2rem;
+}
+
 .client-focus-section {
   background:
     linear-gradient(rgba(0, 87, 217, 0.04) 1px, transparent 1px),
@@ -3980,6 +4120,20 @@ p {
     grid-template-columns: 1fr;
   }
 
+  .sprinkler-project-card {
+    grid-template-columns: 1fr;
+  }
+
+  .sprinkler-project-card img {
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: 0;
+  }
+
+  .service-project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .contact-layout {
     grid-template-columns: 1fr;
   }
@@ -4320,9 +4474,26 @@ p {
   .service-detail-section .page-shell,
   .service-capability-section .page-shell,
   .contact-main-section .page-shell,
+  .project-intro-section .page-shell,
+  .sprinkler-project-section .page-shell,
+  .service-project-section .page-shell,
   .contact-process-section .page-shell {
     width: min(calc(100% - 2rem), 22rem);
     overflow: hidden;
+  }
+
+  .sprinkler-project-card > div,
+  .service-project-card > div,
+  .project-intro-card {
+    padding: 1.15rem;
+  }
+
+  .service-project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-project-card img {
+    height: 12rem;
   }
 
   .service-detail-content,
