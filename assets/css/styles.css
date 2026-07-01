@@ -1092,56 +1092,91 @@ p {
 
 .involvement-section {
   background:
-    linear-gradient(rgba(0, 87, 217, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 87, 217, 0.04) 1px, transparent 1px),
-    var(--color-surface);
-  background-size: 38px 38px;
+    linear-gradient(rgba(0, 87, 217, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 87, 217, 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, #ffffff, #f5f8fc);
+  background-size: 38px 38px, 38px 38px, auto;
+  border-block: 1px solid var(--color-border);
 }
 
 .involvement-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.58fr) minmax(0, 1fr);
-  gap: clamp(1.5rem, 4vw, 3rem);
-  align-items: start;
+  grid-template-columns: minmax(0, 0.6fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+  align-items: center;
 }
 
 .trigger-list {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.85rem;
+  padding: clamp(1rem, 2.4vw, 1.35rem);
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(158, 199, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(158, 199, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(135deg, rgba(3, 26, 54, 0.98), rgba(6, 43, 84, 0.96));
+  background-size: 28px 28px, 28px 28px, auto;
+  border: 1px solid rgba(184, 202, 225, 0.42);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lift);
 }
 
 .trigger-item {
   position: relative;
-  min-height: 4.6rem;
-  padding: 0.9rem 1rem 0.9rem 2.8rem;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 0.85rem;
+  align-items: start;
+  min-height: 8rem;
+  padding: 1rem;
   margin-top: 0;
   color: var(--color-navy);
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(255, 255, 255, 0.2);
   font-weight: 800;
   transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
 .trigger-item::before {
-  position: absolute;
-  top: 1.18rem;
-  left: 1rem;
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid var(--color-blue);
-  border-radius: 3px;
-  content: "";
+  display: none;
 }
 
 .trigger-item::after {
-  position: absolute;
-  top: 1.32rem;
-  left: 1.37rem;
-  width: 0.34rem;
-  height: 0.62rem;
-  border-right: 2px solid var(--color-blue);
-  border-bottom: 2px solid var(--color-blue);
-  transform: rotate(45deg);
-  content: "";
+  display: none;
+}
+
+.trigger-item span {
+  display: inline-grid;
+  min-width: 3.1rem;
+  min-height: 2.25rem;
+  place-items: center;
+  padding-inline: 0.5rem;
+  color: var(--color-surface);
+  background: linear-gradient(135deg, var(--color-blue), var(--color-navy));
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.trigger-item strong {
+  display: block;
+  min-width: 0;
+  color: var(--color-navy);
+  font-size: 1rem;
+  line-height: 1.22;
+}
+
+.trigger-item p {
+  grid-column: 2;
+  margin-top: 0.45rem;
+  color: var(--color-muted);
+  font-size: 0.86rem;
+  font-weight: 500;
+  line-height: 1.45;
 }
 
 .experience-matrix {
@@ -4341,7 +4376,12 @@ p {
   }
 
   .trigger-item {
-    padding-left: 2.8rem;
+    padding: 1rem;
+  }
+
+  .trigger-item strong,
+  .trigger-item p {
+    grid-column: 1 / -1;
   }
 
   .experience-matrix {
