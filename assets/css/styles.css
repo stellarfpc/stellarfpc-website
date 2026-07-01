@@ -949,16 +949,18 @@ p {
 .capability-shield {
   position: relative;
   display: grid;
-  min-height: clamp(18rem, 28vw, 23rem);
-  place-items: center;
-  padding: clamp(1.4rem, 3vw, 2rem);
+  min-height: clamp(19rem, 28vw, 23.5rem);
+  align-content: center;
+  justify-items: center;
+  row-gap: 0.9rem;
+  padding: clamp(4.25rem, 7vw, 5rem) clamp(1.45rem, 3vw, 2rem) clamp(3.4rem, 6vw, 4.2rem);
   overflow: hidden;
   color: #ffffff;
   background:
     radial-gradient(circle at 50% 18%, rgba(72, 155, 255, 0.34), transparent 32%),
     linear-gradient(145deg, rgba(3, 26, 54, 0.94), rgba(0, 87, 217, 0.72));
   border: 1px solid rgba(184, 213, 255, 0.42);
-  clip-path: polygon(50% 0, 90% 13%, 88% 61%, 50% 100%, 12% 61%, 10% 13%);
+  clip-path: polygon(50% 0, 90% 13%, 87% 62%, 50% 96%, 13% 62%, 10% 13%);
   box-shadow: 0 34px 90px rgba(0, 0, 0, 0.34);
   isolation: isolate;
 }
@@ -995,7 +997,7 @@ p {
 
 .shield-mark {
   position: absolute;
-  top: clamp(2.8rem, 6vw, 4rem);
+  top: clamp(2.45rem, 5vw, 3.25rem);
   width: 2.2rem;
   height: 2.2rem;
   background: rgba(255, 255, 255, 0.12);
@@ -1027,8 +1029,7 @@ p {
   border-radius: 999px;
 }
 
-.shield-kicker,
-.shield-footer {
+.shield-kicker {
   margin: 0;
   color: rgba(255, 255, 255, 0.72);
   font-size: 0.68rem;
@@ -1038,32 +1039,27 @@ p {
 }
 
 .shield-kicker {
-  align-self: end;
-  margin-top: clamp(3.4rem, 8vw, 4.7rem);
-}
-
-.shield-footer {
-  align-self: start;
+  transform: translateY(-0.15rem);
 }
 
 .shield-rotator {
   position: relative;
   display: grid;
-  width: min(100%, 16rem);
-  min-height: 5.4rem;
+  width: min(100%, 16.5rem);
+  min-height: 6.7rem;
   place-items: center;
-  margin-block: 0.85rem;
+  margin: 0;
   text-align: center;
 }
 
 .shield-rotator span {
   position: absolute;
-  max-width: 15rem;
+  max-width: 15.8rem;
   opacity: 0;
   color: #ffffff;
-  font-size: clamp(1.45rem, 2.4vw, 1.95rem);
+  font-size: clamp(1.32rem, 2.05vw, 1.72rem);
   font-weight: 900;
-  line-height: 1.08;
+  line-height: 1.14;
   text-shadow: 0 10px 24px rgba(0, 0, 0, 0.32);
   transform: translateY(0.8rem);
   animation: capability-cycle 20s ease-in-out infinite;
@@ -1141,7 +1137,7 @@ p {
 
 .why-choice-section .evidence-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .evidence-card,
@@ -1164,6 +1160,8 @@ p {
 .why-choice-section .evidence-card {
   position: relative;
   overflow: hidden;
+  min-height: 14rem;
+  padding: 1.35rem;
   border-color: rgba(0, 87, 217, 0.14);
 }
 
@@ -1191,6 +1189,11 @@ p {
 
 .why-choice-section .evidence-card h3::before {
   display: none;
+}
+
+.why-choice-section .evidence-card h3 {
+  font-size: clamp(1.45rem, 2.5vw, 2rem);
+  line-height: 1.12;
 }
 
 .evidence-card h3::before,
@@ -1318,6 +1321,23 @@ p {
 
 .core-service-card .service-icon {
   margin-bottom: 0.85rem;
+}
+
+.service-achievement {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  margin-bottom: 0.78rem;
+  padding: 0.42rem 0.58rem;
+  color: var(--color-blue);
+  background: var(--color-surface-blue);
+  border: 1px solid rgba(0, 87, 217, 0.16);
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  text-transform: uppercase;
 }
 
 .core-service-card a {
@@ -4765,6 +4785,20 @@ p {
   .client-focus-card {
     flex: 0 0 min(100%, 20rem);
     scroll-snap-align: start;
+  }
+
+  .why-choice-section .evidence-grid,
+  .services-summary-section .core-service-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow: visible;
+    padding-bottom: 0;
+    scroll-snap-type: none;
+  }
+
+  .why-choice-section .evidence-card,
+  .services-summary-section .core-service-card {
+    flex: initial;
   }
 
   .trigger-item {
