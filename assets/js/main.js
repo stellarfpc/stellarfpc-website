@@ -182,10 +182,40 @@
     elements.forEach((element) => observer.observe(element));
   }
 
+  function bindContactForm() {
+    const form = document.querySelector("[data-contact-form]");
+
+    if (!form) {
+      return;
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const data = new FormData(form);
+      const lines = [
+        `Name: ${data.get("name") || ""}`,
+        `Email: ${data.get("email") || ""}`,
+        `Phone: ${data.get("phone") || ""}`,
+        `Company / Organization: ${data.get("company") || ""}`,
+        `Building Address: ${data.get("buildingAddress") || ""}`,
+        `Service Needed: ${data.get("service") || ""}`,
+        "",
+        "Message:",
+        data.get("message") || "",
+      ];
+
+      const subject = encodeURIComponent("StellarFPC Consultation Request");
+      const body = encodeURIComponent(lines.join("\n"));
+      window.location.href = `mailto:info@stellarfpc.com?subject=${subject}&body=${body}`;
+    });
+  }
+
   document.querySelectorAll("[data-component='site-header']").forEach(renderHeader);
   document.querySelectorAll("[data-component='site-footer']").forEach(renderFooter);
   bindNavigation();
   bindDropdowns();
   bindHeaderScrollState();
   bindRevealAnimation();
+  bindContactForm();
 })();
