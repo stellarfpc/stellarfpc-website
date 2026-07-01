@@ -64,8 +64,6 @@
   }
 
   function renderFooter(target) {
-    const year = new Date().getFullYear();
-
     target.innerHTML = `
       <footer class="site-footer">
         <div class="footer-shell">
@@ -103,7 +101,7 @@
             <h3 id="footer-email">Contact</h3>
             <a href="mailto:info@stellarfpc.com">info@stellarfpc.com</a>
           </section>
-          <div class="footer-bottom">&copy; ${year} StellarFPC. All rights reserved.</div>
+          <div class="footer-bottom">&copy; 2022 Stellar Fire Protection &amp; Code Consulting. All rights reserved.</div>
         </div>
       </footer>
     `;
