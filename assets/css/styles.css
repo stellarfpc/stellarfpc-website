@@ -5847,3 +5847,9 @@ font-size:.75rem;
 font-weight:700;
 
 }
+
+.project-rotator-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
