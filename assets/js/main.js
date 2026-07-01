@@ -500,3 +500,23 @@ document.querySelectorAll("[data-project-rotator]").forEach((rotator) => {
   showSlide(0);
   start();
 });
+
+const serviceSlides=document.querySelectorAll(".service-slide");
+
+let serviceIndex=0;
+
+setInterval(()=>{
+
+serviceSlides[serviceIndex].classList.remove("active");
+
+serviceIndex++;
+
+if(serviceIndex>=serviceSlides.length){
+
+serviceIndex=0;
+
+}
+
+serviceSlides[serviceIndex].classList.add("active");
+
+},6000);
