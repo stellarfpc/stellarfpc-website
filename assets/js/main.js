@@ -12,8 +12,7 @@
   const servicesItems = [
     "Fire Sprinkler System Design",
     "Fire Safety Plans & Training",
-    "Fire Code Consulting",
-    "Fire Inspection Order Support",
+    "Fire Code Compliance & Inspection Order Solutions",
   ];
 
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
@@ -87,8 +86,7 @@
             <nav class="footer-links" aria-label="Footer services navigation">
               <a href="services.html">Fire Sprinkler System Design</a>
               <a href="services.html">Fire Safety Plans &amp; Training</a>
-              <a href="services.html">Code Consulting</a>
-              <a href="services.html">Inspection Order Support</a>
+              <a href="services.html">Fire Code Compliance &amp; Inspection Order Solutions</a>
             </nav>
           </section>
           <section class="footer-column" aria-labelledby="footer-experience">
