@@ -5,6 +5,7 @@
   ];
 
   const trailingNavItems = [
+    { label: "Representative Experience", href: "projects.html" },
     { label: "Contact", href: "contact.html" },
   ];
 
@@ -13,14 +14,6 @@
     "Fire Safety Plans & Training",
     "Fire Code Consulting",
     "Fire Inspection Order Support",
-  ];
-
-  const projectsItems = [
-    "Healthcare",
-    "Commercial",
-    "Industrial",
-    "Residential",
-    "Institutional",
   ];
 
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
@@ -44,10 +37,6 @@
       .map((label) => `<a href="services.html">${label}</a>`)
       .join("");
 
-    const projectsMenu = projectsItems
-      .map((label) => `<a href="projects.html">${label}</a>`)
-      .join("");
-
     target.innerHTML = `
       <header class="site-header">
         <div class="nav-shell">
@@ -64,12 +53,6 @@
               <button class="dropdown-toggle" type="button" aria-expanded="false">Services</button>
               <div class="dropdown-menu">
                 ${servicesMenu}
-              </div>
-            </div>
-            <div class="nav-dropdown">
-              <button class="dropdown-toggle" type="button" aria-expanded="false">Projects</button>
-              <div class="dropdown-menu">
-                ${projectsMenu}
               </div>
             </div>
             ${trailingLinks}
@@ -97,7 +80,7 @@
               <a href="index.html">Home</a>
               <a href="about.html">About</a>
               <a href="services.html">Services</a>
-              <a href="projects.html">Projects</a>
+              <a href="projects.html">Representative Experience</a>
               <a href="contact.html">Contact</a>
             </nav>
           </section>
@@ -111,13 +94,9 @@
             </nav>
           </section>
           <section class="footer-column" aria-labelledby="footer-experience">
-            <h3 id="footer-experience">Project Experience</h3>
-            <nav class="footer-links" aria-label="Footer project experience navigation">
-              <a href="projects.html">Healthcare</a>
-              <a href="projects.html">Commercial</a>
-              <a href="projects.html">Industrial</a>
-              <a href="projects.html">Residential</a>
-              <a href="projects.html">Institutional</a>
+            <h3 id="footer-experience">Experience</h3>
+            <nav class="footer-links" aria-label="Footer representative experience navigation">
+              <a href="projects.html">Representative Experience</a>
             </nav>
           </section>
           <section class="footer-column" aria-labelledby="footer-email">

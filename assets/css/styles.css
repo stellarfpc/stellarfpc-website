@@ -94,7 +94,8 @@ svg {
 .nav-shell,
 .footer-shell,
 .page-shell {
-  width: min(calc(100% - (var(--space-page) * 2)), var(--max-width));
+  width: calc(100% - (var(--space-page) * 2));
+  max-width: var(--max-width);
   margin-inline: auto;
 }
 
@@ -1901,6 +1902,236 @@ p {
   color: var(--color-navy);
 }
 
+.representative-summary-section {
+  padding-block: clamp(4.5rem, 8vw, 6.5rem);
+}
+
+.building-type-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+
+.building-type-card,
+.support-summary-card {
+  min-width: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-subtle);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.building-type-card {
+  display: flex;
+  min-height: 19rem;
+  flex-direction: column;
+  padding: 1.25rem;
+}
+
+.building-type-card:hover,
+.support-summary-card:hover {
+  border-color: rgba(0, 87, 217, 0.34);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-4px);
+}
+
+.building-type-visual {
+  position: relative;
+  display: block;
+  min-height: 7.2rem;
+  margin: -1.25rem -1.25rem 1.2rem;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+    linear-gradient(135deg, #0a386b, #6ea4e8);
+  background-size: 22px 22px, 22px 22px, auto;
+}
+
+.building-type-visual::before {
+  position: absolute;
+  right: 1rem;
+  bottom: 0;
+  width: 42%;
+  height: 68%;
+  background:
+    linear-gradient(90deg, transparent 22%, rgba(255, 255, 255, 0.42) 23%, transparent 25%),
+    linear-gradient(180deg, transparent 20%, rgba(255, 255, 255, 0.28) 21%, transparent 23%);
+  background-size: 18px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-bottom: 0;
+  content: "";
+}
+
+.building-type-healthcare {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(135deg, #f8fbff, #c8dcf4 54%, #6f91ba);
+}
+
+.building-type-commercial {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.18) 1px, transparent 1px),
+    linear-gradient(135deg, #0a386b, #6ea4e8);
+}
+
+.building-type-industrial {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+    linear-gradient(135deg, #142031, #5b789e 52%, #d7e3f0);
+}
+
+.building-type-residential {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(135deg, #e8f1fb, #8eb8e8 50%, #163b64);
+}
+
+.building-type-institutional {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(135deg, #f3f7fb, #91acd0 50%, #0b2f5a);
+}
+
+.building-type-card h3,
+.support-summary-card h3 {
+  color: var(--color-navy);
+}
+
+.building-type-card p {
+  margin-top: 0.72rem;
+  color: var(--color-muted);
+  font-size: 0.92rem;
+  overflow-wrap: anywhere;
+}
+
+.building-type-tags {
+  margin-top: auto;
+  padding-top: 1.2rem;
+  color: var(--color-blue);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+  text-transform: uppercase;
+}
+
+.support-summary-section {
+  padding-block: clamp(4.5rem, 8vw, 6.5rem);
+}
+
+.support-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+
+.support-summary-card {
+  padding: 1.35rem;
+}
+
+.support-summary-icon {
+  position: relative;
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1.1rem;
+  color: var(--color-blue);
+  background: var(--color-surface-blue);
+  border: 1px solid rgba(0, 87, 217, 0.18);
+  border-radius: 999px;
+}
+
+.support-summary-icon::before,
+.support-summary-icon::after {
+  position: absolute;
+  content: "";
+}
+
+.support-summary-sprinkler::before {
+  left: 50%;
+  top: 0.8rem;
+  width: 1.35rem;
+  height: 0.78rem;
+  border: 2px solid currentColor;
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  transform: translateX(-50%);
+}
+
+.support-summary-sprinkler::after {
+  left: 1.02rem;
+  bottom: 0.68rem;
+  width: 1rem;
+  height: 0.9rem;
+  background:
+    radial-gradient(circle at 50% 100%, currentColor 0.1rem, transparent 0.12rem),
+    radial-gradient(circle at 20% 100%, currentColor 0.07rem, transparent 0.09rem),
+    radial-gradient(circle at 80% 100%, currentColor 0.07rem, transparent 0.09rem);
+}
+
+.support-summary-plans::before,
+.support-summary-code::before,
+.support-summary-order::before {
+  left: 0.92rem;
+  top: 0.72rem;
+  width: 1.15rem;
+  height: 1.55rem;
+  background: #ffffff;
+  border: 2px solid currentColor;
+  border-radius: 0.2rem;
+}
+
+.support-summary-plans::after,
+.support-summary-code::after,
+.support-summary-order::after {
+  left: 1.18rem;
+  top: 1.18rem;
+  width: 0.62rem;
+  height: 2px;
+  background: currentColor;
+  box-shadow: 0 0.42rem 0 currentColor;
+}
+
+.support-summary-order::before {
+  border-left-color: var(--color-red);
+}
+
+.support-summary-card ul {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.support-summary-card li {
+  position: relative;
+  padding-left: 1rem;
+  color: var(--color-muted);
+  font-size: 0.92rem;
+}
+
+.support-summary-card li::before {
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.34rem;
+  height: 0.34rem;
+  background: var(--color-blue);
+  border-radius: 999px;
+  content: "";
+}
+
 .services-section .section-heading,
 .why-section .section-heading {
   margin-inline: auto;
@@ -2691,6 +2922,11 @@ p {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .building-type-grid,
+  .support-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .experience-service-block,
   .experience-service-block-alt {
     grid-template-columns: 1fr;
@@ -2841,8 +3077,38 @@ p {
     max-width: 21rem;
   }
 
+  .representative-summary-section .page-shell,
+  .support-summary-section .page-shell {
+    width: min(calc(100% - 2rem), 22rem);
+    overflow: hidden;
+  }
+
+  .representative-summary-section .section-heading,
+  .support-summary-section .section-heading {
+    max-width: 18rem;
+  }
+
   .sector-card-grid {
     grid-template-columns: 1fr;
+  }
+
+  .building-type-grid,
+  .support-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .building-type-card {
+    min-height: auto;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .building-type-card p,
+  .building-type-tags,
+  .support-summary-card li {
+    max-width: 100%;
+    word-break: normal;
+    overflow-wrap: anywhere;
   }
 
   .sector-visual,
