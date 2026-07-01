@@ -4407,6 +4407,377 @@ p {
   transform: translateY(0);
 }
 
+.integrated-services-section {
+  background:
+    linear-gradient(rgba(0, 87, 217, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 87, 217, 0.035) 1px, transparent 1px),
+    var(--color-surface-soft);
+  background-size: 38px 38px, 38px 38px, auto;
+}
+
+.service-experience-panel {
+  padding-block: clamp(3.75rem, 7vw, 6.5rem);
+  border-top: 1px solid var(--color-border);
+}
+
+.service-experience-panel-alt {
+  background:
+    linear-gradient(135deg, rgba(3, 26, 54, 0.96), rgba(5, 46, 93, 0.92)),
+    var(--color-navy);
+  color: #ffffff;
+}
+
+.service-experience-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(20rem, 1.05fr);
+  gap: clamp(1.6rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.service-experience-copy {
+  min-width: 0;
+}
+
+.service-experience-copy .eyebrow {
+  color: var(--color-blue);
+}
+
+.service-experience-panel-alt .service-experience-copy .eyebrow {
+  color: #8fc2ff;
+}
+
+.service-experience-copy h2 {
+  margin-top: 0.8rem;
+  color: var(--color-navy);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.02;
+}
+
+.service-experience-panel-alt .service-experience-copy h2,
+.service-experience-panel-alt .service-experience-copy p,
+.service-experience-panel-alt .service-experience-copy li {
+  color: #ffffff;
+}
+
+.service-experience-copy > p {
+  max-width: 42rem;
+  margin-top: 1rem;
+  color: var(--color-muted);
+  font-size: clamp(1rem, 1.4vw, 1.12rem);
+  line-height: 1.65;
+}
+
+.service-experience-copy ul {
+  display: grid;
+  gap: 0.7rem;
+  margin: 1.35rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service-experience-copy li {
+  position: relative;
+  padding-left: 1.45rem;
+  color: var(--color-muted-strong);
+  line-height: 1.45;
+}
+
+.service-experience-copy li::before {
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 0.48rem;
+  height: 0.48rem;
+  background: var(--color-blue);
+  border-radius: 999px;
+  box-shadow: 0 0 0 0.34rem rgba(0, 87, 217, 0.12);
+  content: "";
+}
+
+.service-experience-panel-alt .service-experience-copy li::before {
+  background: #8fc2ff;
+  box-shadow: 0 0 0 0.34rem rgba(143, 194, 255, 0.16);
+}
+
+.service-example-carousel {
+  min-width: 0;
+  padding: clamp(1rem, 3vw, 1.35rem);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(0, 87, 217, 0.14);
+  border-radius: 12px;
+  box-shadow: 0 24px 70px rgba(3, 26, 54, 0.13);
+}
+
+.service-experience-panel-alt .service-example-carousel {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 26px 78px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(12px);
+}
+
+.service-example-heading {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.service-example-heading h3 {
+  margin: 0;
+  color: var(--color-navy);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+}
+
+.service-experience-panel-alt .service-example-heading h3 {
+  color: #ffffff;
+}
+
+.service-example-controls {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.service-example-controls button {
+  display: inline-grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  color: var(--color-navy);
+  background: #ffffff;
+  border: 1px solid rgba(0, 87, 217, 0.18);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.service-example-controls button:hover,
+.service-example-controls button:focus-visible {
+  border-color: rgba(0, 87, 217, 0.42);
+  box-shadow: 0 10px 24px rgba(0, 87, 217, 0.16);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.service-example-track {
+  position: relative;
+  min-height: clamp(28rem, 38vw, 33rem);
+  margin-top: 1rem;
+  overflow: hidden;
+  border-radius: 9px;
+}
+
+.service-example-card {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(1rem);
+  transition: opacity 420ms ease, transform 420ms ease;
+}
+
+.service-example-card.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+.service-example-card img,
+.service-example-card .service-project-visual {
+  width: 100%;
+  height: clamp(14rem, 20vw, 17rem);
+  object-fit: cover;
+}
+
+.service-example-card > div {
+  display: grid;
+  align-content: start;
+  min-width: 0;
+  padding: clamp(1rem, 3vw, 1.35rem);
+}
+
+.service-example-card h3 {
+  margin: 0;
+  color: var(--color-navy);
+  font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+  line-height: 1.12;
+}
+
+.service-example-card p {
+  margin: 0.7rem 0 0;
+  color: var(--color-muted);
+  line-height: 1.55;
+}
+
+.service-example-card .tag-list {
+  align-self: end;
+  margin-top: 1rem;
+}
+
+.service-example-dots {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.service-example-dots button {
+  width: 0.62rem;
+  height: 0.62rem;
+  padding: 0;
+  background: rgba(0, 87, 217, 0.22);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: width 180ms ease, background-color 180ms ease;
+}
+
+.service-example-dots button.is-active {
+  width: 1.65rem;
+  background: var(--color-blue);
+}
+
+.service-example-dots button:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+}
+
+.service-example-carousel-support .service-project-visual {
+  background:
+    radial-gradient(circle at 22% 24%, rgba(255, 255, 255, 0.6), transparent 19%),
+    linear-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(135deg, #071f3f, #0c5fb5 58%, #c8dcf3);
+  background-size: auto, 24px 24px, 24px 24px, auto;
+}
+
+.project-directory-section {
+  padding-block: clamp(3.5rem, 7vw, 5.75rem);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+
+.project-directory-section-alt {
+  background:
+    linear-gradient(rgba(0, 87, 217, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 87, 217, 0.035) 1px, transparent 1px),
+    var(--color-surface-soft);
+  background-size: 38px 38px, 38px 38px, auto;
+}
+
+.project-group-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+.project-group-card,
+.project-summary-card,
+.project-empty-note {
+  min-width: 0;
+  padding: clamp(1.15rem, 3vw, 1.55rem);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-subtle);
+}
+
+.project-group-heading {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.project-group-heading h3,
+.project-summary-card h3 {
+  margin: 0;
+  color: var(--color-navy);
+  font-size: clamp(1.1rem, 1.9vw, 1.35rem);
+}
+
+.project-group-heading span {
+  flex: 0 0 auto;
+  color: var(--color-blue);
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project-group-card ul {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-group-card li {
+  position: relative;
+  padding-left: 1rem;
+  color: var(--color-muted-strong);
+  line-height: 1.35;
+}
+
+.project-group-card li::before {
+  position: absolute;
+  left: 0;
+  top: 0.58em;
+  width: 0.34rem;
+  height: 0.34rem;
+  background: var(--color-blue);
+  border-radius: 999px;
+  content: "";
+}
+
+.project-summary-card {
+  max-width: 48rem;
+  margin-top: 1.5rem;
+}
+
+.project-summary-card p,
+.project-empty-note p {
+  margin-top: 0.7rem;
+  color: var(--color-muted);
+  line-height: 1.55;
+}
+
+.project-summary-card .tag-list {
+  margin-top: 1rem;
+}
+
+.project-summary-card span {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 1rem;
+  padding: 0.48rem 0.7rem;
+  color: var(--color-blue);
+  background: rgba(0, 87, 217, 0.08);
+  border: 1px solid rgba(0, 87, 217, 0.16);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.project-empty-note {
+  max-width: 52rem;
+  margin-top: 1.35rem;
+  border-left: 4px solid var(--color-blue);
+}
+
 @media (max-width: 1120px) {
   .nav-shell {
     min-height: 82px;
@@ -4455,6 +4826,14 @@ p {
 
   .nav-dropdown.is-open .dropdown-menu {
     display: block;
+  }
+
+  .service-experience-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-example-track {
+    min-height: 30rem;
   }
 }
 
@@ -4939,8 +5318,10 @@ p {
 
   .service-detail-section .page-shell,
   .service-capability-section .page-shell,
+  .integrated-services-section .page-shell,
   .contact-main-section .page-shell,
   .project-intro-section .page-shell,
+  .project-directory-section .page-shell,
   .sprinkler-project-section .page-shell,
   .service-project-section .page-shell,
   .contact-process-section .page-shell {
@@ -4956,6 +5337,19 @@ p {
 
   .service-project-grid {
     grid-template-columns: 1fr;
+  }
+
+  .project-group-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-experience-panel {
+    padding-block: 3rem;
+  }
+
+  .service-example-heading {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .service-project-card img,
@@ -5112,6 +5506,44 @@ p {
   .brand-logo {
     width: auto;
     height: clamp(3.65rem, 16vw, 4.8rem);
+  }
+}
+
+@media (max-width: 620px) {
+  .service-example-carousel {
+    padding: 0.85rem;
+  }
+
+  .service-example-track {
+    min-height: 31rem;
+  }
+
+  .service-example-card img,
+  .service-example-card .service-project-visual {
+    height: 12.5rem;
+  }
+
+  .service-example-card > div,
+  .project-group-card,
+  .project-summary-card,
+  .project-empty-note {
+    padding: 1rem;
+  }
+
+  .project-group-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-example-card,
+  .service-example-controls button,
+  .service-example-dots button,
+  .project-group-card,
+  .project-summary-card {
+    transition: none !important;
   }
 }
 

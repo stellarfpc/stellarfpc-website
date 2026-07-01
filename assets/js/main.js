@@ -5,7 +5,7 @@
   ];
 
   const trailingNavItems = [
-    { label: "Completed Projects", href: "projects.html" },
+    { label: "Projects", href: "projects.html" },
     { label: "Contact", href: "contact.html" },
   ];
 
@@ -77,7 +77,7 @@
               <a href="index.html">Home</a>
               <a href="about.html">About</a>
               <a href="services.html">Services</a>
-              <a href="projects.html">Completed Projects</a>
+              <a href="projects.html">Projects</a>
               <a href="contact.html">Contact</a>
             </nav>
           </section>
@@ -91,8 +91,8 @@
           </section>
           <section class="footer-column" aria-labelledby="footer-experience">
             <h3 id="footer-experience">Projects</h3>
-            <nav class="footer-links" aria-label="Footer completed projects navigation">
-              <a href="projects.html">Completed Projects</a>
+            <nav class="footer-links" aria-label="Footer projects navigation">
+              <a href="projects.html">Projects</a>
             </nav>
           </section>
           <section class="footer-column" aria-labelledby="footer-email">
@@ -304,6 +304,126 @@
     });
   }
 
+  function bindServiceCarousels() {
+    const carousels = document.querySelectorAll("[data-service-carousel]");
+
+    if (!carousels.length) {
+      return;
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    carousels.forEach((carousel) => {
+      const slides = Array.from(carousel.querySelectorAll("[data-service-slide]"));
+      const dots = Array.from(carousel.querySelectorAll("[data-service-dot]"));
+      const previousButton = carousel.querySelector("[data-service-prev]");
+      const nextButton = carousel.querySelector("[data-service-next]");
+      const interval = Number(carousel.dataset.interval || 6000);
+      let activeIndex = Math.max(0, slides.findIndex((slide) => slide.classList.contains("is-active")));
+      let timerId = null;
+      let isPaused = false;
+
+      if (slides.length <= 1) {
+        return;
+      }
+
+      function showSlide(index) {
+        activeIndex = (index + slides.length) % slides.length;
+
+        slides.forEach((slide, slideIndex) => {
+          const active = slideIndex === activeIndex;
+          slide.classList.toggle("is-active", active);
+          slide.setAttribute("aria-hidden", String(!active));
+        });
+
+        dots.forEach((dot, dotIndex) => {
+          const active = dotIndex === activeIndex;
+          dot.classList.toggle("is-active", active);
+          dot.setAttribute("aria-selected", String(active));
+          dot.tabIndex = active ? 0 : -1;
+        });
+      }
+
+      function stopCarousel() {
+        if (!timerId) {
+          return;
+        }
+
+        window.clearInterval(timerId);
+        timerId = null;
+      }
+
+      function startCarousel() {
+        if (reducedMotion.matches || isPaused || timerId) {
+          return;
+        }
+
+        timerId = window.setInterval(() => showSlide(activeIndex + 1), interval);
+      }
+
+      function pauseCarousel() {
+        isPaused = true;
+        stopCarousel();
+      }
+
+      function resumeCarousel() {
+        isPaused = false;
+        startCarousel();
+      }
+
+      previousButton?.addEventListener("click", () => {
+        showSlide(activeIndex - 1);
+        stopCarousel();
+        startCarousel();
+      });
+
+      nextButton?.addEventListener("click", () => {
+        showSlide(activeIndex + 1);
+        stopCarousel();
+        startCarousel();
+      });
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          showSlide(index);
+          stopCarousel();
+          startCarousel();
+        });
+      });
+
+      carousel.addEventListener("mouseenter", pauseCarousel);
+      carousel.addEventListener("mouseleave", resumeCarousel);
+      carousel.addEventListener("focusin", pauseCarousel);
+      carousel.addEventListener("focusout", (event) => {
+        if (!carousel.contains(event.relatedTarget)) {
+          resumeCarousel();
+        }
+      });
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          stopCarousel();
+        } else {
+          startCarousel();
+        }
+      });
+
+      if (typeof reducedMotion.addEventListener === "function") {
+        reducedMotion.addEventListener("change", () => {
+          if (reducedMotion.matches) {
+            stopCarousel();
+            showSlide(activeIndex);
+          } else {
+            startCarousel();
+          }
+        });
+      }
+
+      showSlide(activeIndex);
+      startCarousel();
+    });
+  }
+
   document.querySelectorAll("[data-component='site-header']").forEach(renderHeader);
   document.querySelectorAll("[data-component='site-footer']").forEach(renderFooter);
   bindNavigation();
@@ -312,4 +432,5 @@
   bindRevealAnimation();
   bindContactForm();
   bindCarousels();
+  bindServiceCarousels();
 })();
