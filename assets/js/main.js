@@ -5,7 +5,7 @@
   ];
 
   const trailingNavItems = [
-    { label: "Representative Experience", href: "projects.html" },
+    { label: "Completed Projects", href: "projects.html" },
     { label: "Contact", href: "contact.html" },
   ];
 
@@ -80,7 +80,7 @@
               <a href="index.html">Home</a>
               <a href="about.html">About</a>
               <a href="services.html">Services</a>
-              <a href="projects.html">Representative Experience</a>
+              <a href="projects.html">Completed Projects</a>
               <a href="contact.html">Contact</a>
             </nav>
           </section>
@@ -94,9 +94,9 @@
             </nav>
           </section>
           <section class="footer-column" aria-labelledby="footer-experience">
-            <h3 id="footer-experience">Experience</h3>
-            <nav class="footer-links" aria-label="Footer representative experience navigation">
-              <a href="projects.html">Representative Experience</a>
+            <h3 id="footer-experience">Projects</h3>
+            <nav class="footer-links" aria-label="Footer completed projects navigation">
+              <a href="projects.html">Completed Projects</a>
             </nav>
           </section>
           <section class="footer-column" aria-labelledby="footer-email">
@@ -211,6 +211,103 @@
     });
   }
 
+  function bindCarousels() {
+    const carousels = document.querySelectorAll("[data-carousel]");
+
+    if (!carousels.length) {
+      return;
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    carousels.forEach((carousel) => {
+      let timerId = null;
+      let isPaused = false;
+
+      function getStepSize() {
+        const firstCard = carousel.firstElementChild;
+
+        if (!firstCard) {
+          return carousel.clientWidth;
+        }
+
+        const styles = window.getComputedStyle(carousel);
+        const gap = parseFloat(styles.columnGap || styles.gap || "0") || 0;
+        return firstCard.getBoundingClientRect().width + gap;
+      }
+
+      function advanceCarousel() {
+        if (isPaused || reducedMotion.matches || carousel.scrollWidth <= carousel.clientWidth) {
+          return;
+        }
+
+        const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+        const nextScrollLeft = carousel.scrollLeft >= maxScrollLeft - 4 ? 0 : Math.min(carousel.scrollLeft + getStepSize(), maxScrollLeft);
+
+        carousel.scrollTo({
+          left: nextScrollLeft,
+          behavior: "smooth",
+        });
+      }
+
+      function startCarousel() {
+        if (reducedMotion.matches || timerId) {
+          return;
+        }
+
+        timerId = window.setInterval(advanceCarousel, 5000);
+      }
+
+      function stopCarousel() {
+        if (!timerId) {
+          return;
+        }
+
+        window.clearInterval(timerId);
+        timerId = null;
+      }
+
+      function pauseCarousel() {
+        isPaused = true;
+        stopCarousel();
+      }
+
+      function resumeCarousel() {
+        isPaused = false;
+        startCarousel();
+      }
+
+      carousel.addEventListener("mouseenter", pauseCarousel);
+      carousel.addEventListener("mouseleave", resumeCarousel);
+      carousel.addEventListener("focusin", pauseCarousel);
+      carousel.addEventListener("focusout", (event) => {
+        if (!carousel.contains(event.relatedTarget)) {
+          resumeCarousel();
+        }
+      });
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          stopCarousel();
+        } else if (!isPaused) {
+          startCarousel();
+        }
+      });
+
+      if (typeof reducedMotion.addEventListener === "function") {
+        reducedMotion.addEventListener("change", () => {
+          if (reducedMotion.matches) {
+            stopCarousel();
+          } else if (!isPaused) {
+            startCarousel();
+          }
+        });
+      }
+
+      startCarousel();
+    });
+  }
+
   document.querySelectorAll("[data-component='site-header']").forEach(renderHeader);
   document.querySelectorAll("[data-component='site-footer']").forEach(renderFooter);
   bindNavigation();
@@ -218,4 +315,5 @@
   bindHeaderScrollState();
   bindRevealAnimation();
   bindContactForm();
+  bindCarousels();
 })();
