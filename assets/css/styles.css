@@ -1061,34 +1061,29 @@ p {
   font-weight: 900;
   line-height: 1.14;
   text-shadow: 0 10px 24px rgba(0, 0, 0, 0.32);
+  overflow-wrap: anywhere;
   transform: translateY(0.8rem);
-  animation: capability-cycle 20s ease-in-out infinite;
+  transition: opacity 520ms ease, transform 520ms ease;
 }
 
-.shield-rotator span:nth-child(2) {
-  animation-delay: 5s;
+.shield-rotator span.is-active,
+.shield-rotator:not(.is-js-ready) span:first-child {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.shield-rotator span:nth-child(3) {
-  animation-delay: 10s;
+.capability-shield-services .shield-rotator,
+.capability-shield-projects .shield-rotator,
+.capability-shield-contact .shield-rotator {
+  width: min(100%, 17rem);
+  min-height: 7.1rem;
 }
 
-.shield-rotator span:nth-child(4) {
-  animation-delay: 15s;
-}
-
-@keyframes capability-cycle {
-  0%,
-  18% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  23%,
-  100% {
-    opacity: 0;
-    transform: translateY(-0.7rem);
-  }
+.capability-shield-services .shield-rotator span,
+.capability-shield-projects .shield-rotator span,
+.capability-shield-contact .shield-rotator span {
+  max-width: 16.6rem;
+  font-size: clamp(1.08rem, 1.72vw, 1.42rem);
 }
 
 @keyframes shield-rotate {
@@ -4679,6 +4674,10 @@ p {
   margin-top: clamp(1.5rem, 4vw, 2.25rem);
 }
 
+.project-reference-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+
 .project-group-card,
 .project-summary-card,
 .project-empty-note {
@@ -4751,6 +4750,12 @@ p {
   margin-top: 0.7rem;
   color: var(--color-muted);
   line-height: 1.55;
+}
+
+.project-reference-card {
+  display: grid;
+  align-content: center;
+  min-height: 7rem;
 }
 
 .project-summary-card .tag-list {

@@ -99,7 +99,7 @@
             <h3 id="footer-email">Contact</h3>
             <a href="mailto:info@stellarfpc.com">info@stellarfpc.com</a>
           </section>
-          <div class="footer-bottom">&copy; 2022 Stellar Fire Protection &amp; Code Consulting. All rights reserved.</div>
+          <div class="footer-bottom">&copy; Stellar Fire Protection &amp; Code Consulting. All rights reserved.</div>
         </div>
       </footer>
     `;
@@ -424,6 +424,73 @@
     });
   }
 
+  function bindShieldRotators() {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    document.querySelectorAll("[data-shield-rotator]").forEach((rotator) => {
+      const items = Array.from(rotator.querySelectorAll("span"));
+      const interval = Math.max(Number(rotator.dataset.interval || 4000), 1400);
+      let activeIndex = 0;
+      let timerId = null;
+
+      if (!items.length) {
+        return;
+      }
+
+      function showItem(index) {
+        activeIndex = (index + items.length) % items.length;
+        items.forEach((item, itemIndex) => {
+          item.classList.toggle("is-active", itemIndex === activeIndex);
+        });
+      }
+
+      function stop() {
+        if (!timerId) {
+          return;
+        }
+
+        window.clearInterval(timerId);
+        timerId = null;
+      }
+
+      function start() {
+        if (items.length < 2 || reducedMotion.matches || timerId) {
+          return;
+        }
+
+        timerId = window.setInterval(() => showItem(activeIndex + 1), interval);
+      }
+
+      function handleMotionPreferenceChange() {
+        stop();
+        if (reducedMotion.matches) {
+          showItem(0);
+        } else {
+          start();
+        }
+      }
+
+      rotator.classList.add("is-js-ready");
+      showItem(0);
+      start();
+
+      rotator.addEventListener("mouseenter", stop);
+      rotator.addEventListener("mouseleave", start);
+      rotator.addEventListener("focusin", stop);
+      rotator.addEventListener("focusout", (event) => {
+        if (!rotator.contains(event.relatedTarget)) {
+          start();
+        }
+      });
+
+      if (typeof reducedMotion.addEventListener === "function") {
+        reducedMotion.addEventListener("change", handleMotionPreferenceChange);
+      } else if (typeof reducedMotion.addListener === "function") {
+        reducedMotion.addListener(handleMotionPreferenceChange);
+      }
+    });
+  }
+
   document.querySelectorAll("[data-component='site-header']").forEach(renderHeader);
   document.querySelectorAll("[data-component='site-footer']").forEach(renderFooter);
   bindNavigation();
@@ -433,6 +500,7 @@
   bindContactForm();
   bindCarousels();
   bindServiceCarousels();
+  bindShieldRotators();
 })();
 
 
