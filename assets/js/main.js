@@ -55,7 +55,7 @@
               </div>
             </div>
             ${trailingLinks}
-            <a class="nav-link nav-cta" href="contact.html?service=Fire%20Safety%20Plans%20%26%20Training">Get a Quote</a>
+            <a class="nav-link nav-cta" href="contact.html?service=Fire%20Safety%20Plans%20%26%20Training">Get a Free Quote</a>
           </nav>
         </div>
       </header>
@@ -77,7 +77,6 @@
               <a href="index.html">Home</a>
               <a href="about.html">About</a>
               <a href="services.html">Services</a>
-              <a href="projects.html">Projects</a>
               <a href="faq.html">FAQ</a>
               <a href="contact.html">Contact</a>
             </nav>
@@ -88,12 +87,6 @@
               <a href="services.html#fire-safety-plan">Fire Safety Plan &amp; Training</a>
               <a href="services.html#inspection-order">Fire Inspection Order Solutions</a>
               <a href="services.html#sprinkler-design">Fire Sprinkler Design</a>
-            </nav>
-          </section>
-          <section class="footer-column" aria-labelledby="footer-experience">
-            <h3 id="footer-experience">Projects</h3>
-            <nav class="footer-links" aria-label="Footer projects navigation">
-              <a href="projects.html">Projects</a>
             </nav>
           </section>
           <section class="footer-column" aria-labelledby="footer-email">
