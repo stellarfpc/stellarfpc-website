@@ -1,18 +1,19 @@
 (function () {
   const leadingNavItems = [
     { label: "Home", href: "index.html" },
-    { label: "About", href: "about.html" },
+    { label: "Fire Safety Plans", href: "services.html" },
   ];
 
   const trailingNavItems = [
     { label: "Projects", href: "projects.html" },
+    { label: "About", href: "about.html" },
     { label: "Contact", href: "contact.html" },
   ];
 
   const servicesItems = [
-    "Fire Sprinkler System Design",
     "Fire Safety Plans & Training",
     "Fire Code Compliance Consulting",
+    "Fire Sprinkler System Design",
   ];
 
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
@@ -55,7 +56,7 @@
               </div>
             </div>
             ${trailingLinks}
-            <a class="nav-link nav-cta" href="contact.html">Request Consultation</a>
+            <a class="nav-link nav-cta" href="contact.html?service=Fire%20Safety%20Plans%20%26%20Training">Get a Quote</a>
           </nav>
         </div>
       </header>
@@ -84,9 +85,9 @@
           <section class="footer-column" aria-labelledby="footer-services">
             <h3 id="footer-services">Services</h3>
             <nav class="footer-links" aria-label="Footer services navigation">
-              <a href="services.html">Fire Sprinkler System Design</a>
               <a href="services.html">Fire Safety Plans &amp; Training</a>
               <a href="services.html">Fire Code Compliance Consulting</a>
+              <a href="services.html">Fire Sprinkler System Design</a>
             </nav>
           </section>
           <section class="footer-column" aria-labelledby="footer-experience">
@@ -183,6 +184,17 @@
 
     if (!form) {
       return;
+    }
+
+    const serviceSelect = form.querySelector("[name='service']");
+    const requestedService = new URLSearchParams(window.location.search).get("service");
+
+    if (serviceSelect && requestedService) {
+      const option = Array.from(serviceSelect.options).find((item) => item.value === requestedService || item.textContent === requestedService);
+
+      if (option) {
+        serviceSelect.value = option.value;
+      }
     }
 
     form.addEventListener("submit", (event) => {
