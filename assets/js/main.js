@@ -1,19 +1,18 @@
 (function () {
   const leadingNavItems = [
     { label: "Home", href: "index.html" },
-    { label: "Fire Safety Plans", href: "services.html" },
+    { label: "About", href: "about.html" },
   ];
 
   const trailingNavItems = [
-    { label: "Projects", href: "projects.html" },
-    { label: "About", href: "about.html" },
+    { label: "FAQ", href: "faq.html" },
     { label: "Contact", href: "contact.html" },
   ];
 
   const servicesItems = [
-    "Fire Safety Plans & Training",
-    "Fire Code Compliance Consulting",
-    "Fire Sprinkler System Design",
+    { label: "Fire Safety Plan & Training", href: "services.html#fire-safety-plan" },
+    { label: "Fire Inspection Order Solutions", href: "services.html#inspection-order" },
+    { label: "Fire Sprinkler Design", href: "services.html#sprinkler-design" },
   ];
 
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
@@ -34,7 +33,7 @@
       .join("");
 
     const servicesMenu = servicesItems
-      .map((label) => `<a href="services.html">${label}</a>`)
+      .map((item) => `<a href="${item.href}">${item.label}</a>`)
       .join("");
 
     target.innerHTML = `
@@ -79,15 +78,16 @@
               <a href="about.html">About</a>
               <a href="services.html">Services</a>
               <a href="projects.html">Projects</a>
+              <a href="faq.html">FAQ</a>
               <a href="contact.html">Contact</a>
             </nav>
           </section>
           <section class="footer-column" aria-labelledby="footer-services">
             <h3 id="footer-services">Services</h3>
             <nav class="footer-links" aria-label="Footer services navigation">
-              <a href="services.html">Fire Safety Plans &amp; Training</a>
-              <a href="services.html">Fire Code Compliance Consulting</a>
-              <a href="services.html">Fire Sprinkler System Design</a>
+              <a href="services.html#fire-safety-plan">Fire Safety Plan &amp; Training</a>
+              <a href="services.html#inspection-order">Fire Inspection Order Solutions</a>
+              <a href="services.html#sprinkler-design">Fire Sprinkler Design</a>
             </nav>
           </section>
           <section class="footer-column" aria-labelledby="footer-experience">
