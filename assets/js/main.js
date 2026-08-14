@@ -10,9 +10,9 @@
   ];
 
   const servicesItems = [
-    { label: "Fire Safety Plan & Training", href: "services.html#fire-safety-plan" },
-    { label: "Fire Inspection Order Solutions", href: "services.html#inspection-order" },
-    { label: "Fire Sprinkler Design", href: "services.html#sprinkler-design" },
+    { label: "Fire Safety Plan & Training", href: "fire-safety-plan.html" },
+    { label: "Fire Inspection Order Solutions", href: "fire-inspection-order.html" },
+    { label: "Fire Sprinkler Design", href: "fire-sprinkler-design.html" },
   ];
 
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
@@ -84,9 +84,9 @@
           <section class="footer-column" aria-labelledby="footer-services">
             <h3 id="footer-services">Services</h3>
             <nav class="footer-links" aria-label="Footer services navigation">
-              <a href="services.html#fire-safety-plan">Fire Safety Plan &amp; Training</a>
-              <a href="services.html#inspection-order">Fire Inspection Order Solutions</a>
-              <a href="services.html#sprinkler-design">Fire Sprinkler Design</a>
+              <a href="fire-safety-plan.html">Fire Safety Plan &amp; Training</a>
+              <a href="fire-inspection-order.html">Fire Inspection Order Solutions</a>
+              <a href="fire-sprinkler-design.html">Fire Sprinkler Design</a>
             </nav>
           </section>
           <section class="footer-column" aria-labelledby="footer-email">
