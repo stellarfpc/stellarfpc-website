@@ -496,6 +496,32 @@
     });
   }
 
+  function bindProjectRotator() {
+    const projectSlides = document.querySelectorAll(".project-slide");
+    const projectIndicators = document.querySelectorAll(".project-progress span");
+
+    if (projectSlides.length <= 1) {
+      return;
+    }
+
+    let currentProject = 0;
+
+    const showProject = (index) => {
+      projectSlides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+      });
+
+      projectIndicators.forEach((indicator, i) => {
+        indicator.classList.toggle("active", i === index);
+      });
+    };
+
+    window.setInterval(() => {
+      currentProject = (currentProject + 1) % projectSlides.length;
+      showProject(currentProject);
+    }, 7000);
+  }
+
   document.querySelectorAll("[data-component='site-header']").forEach(renderHeader);
   document.querySelectorAll("[data-component='site-footer']").forEach(renderFooter);
   bindNavigation();
@@ -506,4 +532,5 @@
   bindCarousels();
   bindServiceCarousels();
   bindShieldRotators();
+  bindProjectRotator();
 })();
