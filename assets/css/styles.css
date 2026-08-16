@@ -6300,10 +6300,11 @@ font-weight:700;
 
 .gta-skyline-banner {
   position: relative;
-  width: min(96vw, 1600px);
+  width: min(96vw, 1650px);
+  height: clamp(170px, 14vw, 230px);
   margin-inline: auto;
   overflow: hidden;
-  background: #dfe7ef;
+  background: transparent;
 }
 
 .gta-skyline-banner::after {
@@ -6316,11 +6317,10 @@ font-weight:700;
 
 .gta-skyline-banner img {
   width: 100%;
-  height: auto;
-  max-height: 260px;
+  height: 100%;
   display: block;
-  object-fit: contain;
-  object-position: center;
+  object-fit: cover;
+  object-position: 50% 16%;
 }
 
 .home-content-layout {
@@ -7754,6 +7754,17 @@ font-weight:700;
 
   .project-gallery-arrow-next {
     right: 6px;
+  }
+}
+
+@media (max-width: 768px) {
+  .gta-skyline-banner {
+    width: 100%;
+    height: 130px;
+  }
+
+  .gta-skyline-banner img {
+    object-position: 50% 18%;
   }
 }
 
