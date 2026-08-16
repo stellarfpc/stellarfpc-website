@@ -6294,7 +6294,8 @@ font-weight:700;
 
 .gta-skyline-banner {
   position: relative;
-  height: clamp(220px, 23vw, 300px);
+  width: 100%;
+  height: clamp(170px, 18vw, 270px);
   overflow: hidden;
   background: #dfe7ef;
 }
@@ -6310,6 +6311,7 @@ font-weight:700;
 .gta-skyline-banner img {
   width: 100%;
   height: 100%;
+  display: block;
   object-fit: cover;
   object-position: center 58%;
 }
@@ -6327,30 +6329,93 @@ font-weight:700;
 
 .home-service-rail {
   position: sticky;
-  top: 118px;
+  top: 120px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 0;
   align-self: start;
-  padding: clamp(58px, 8vw, 94px) 0 32px;
+  padding: clamp(58px, 8vw, 94px) 0 32px 18px;
+  font-family: var(--font-sans);
+  border-left: 2px solid rgba(0, 87, 217, .22);
 }
 
-.home-service-rail a {
-  color: var(--stellar-navy);
-  font-size: clamp(13px, 1vw, 15px);
-  font-weight: 750;
-  letter-spacing: .035em;
-  line-height: 1.35;
-  text-decoration: none;
+.home-service-rail-title {
+  margin-bottom: 14px;
+  color: #6b7280;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .16em;
   text-transform: uppercase;
+}
+
+.service-rail-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: 12px 0 12px 10px;
+  color: var(--stellar-navy);
+  text-decoration: none;
   transition: color .2s ease, transform .2s ease;
 }
 
-.home-service-rail a:hover,
-.home-service-rail a:focus-visible {
-  color: var(--stellar-red);
+.service-rail-item::before {
+  position: absolute;
+  left: -21px;
+  top: 50%;
+  width: 4px;
+  height: 0;
+  background: linear-gradient(180deg, var(--color-blue), var(--stellar-red));
+  border-radius: 999px;
+  transform: translateY(-50%);
+  transition: height .2s ease;
+  content: "";
+}
+
+.service-rail-item:hover::before,
+.service-rail-item:focus-visible::before {
+  height: 70%;
+}
+
+.service-rail-item:hover,
+.service-rail-item:focus-visible {
+  color: var(--color-blue);
   outline: none;
   transform: translateX(4px);
+}
+
+.service-rail-number {
+  padding-top: 2px;
+  color: var(--stellar-red);
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.service-rail-label {
+  font-size: .94rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: .025em;
+  text-transform: uppercase;
+}
+
+.anchor-target {
+  position: relative;
+  top: -115px;
+  display: block;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  visibility: hidden;
+  scroll-margin-top: 115px;
+}
+
+.service-link-card {
+  scroll-margin-top: 115px;
 }
 
 .btn {
