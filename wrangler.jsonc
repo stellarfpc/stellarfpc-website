@@ -2,6 +2,11 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "stellarfpc-website",
   "compatibility_date": "2026-06-29",
+  "workers_dev": true,
+  "routes": [
+    "stellarfpc.ca/*",
+    "www.stellarfpc.ca/*"
+  ],
   "assets": {
     "directory": "./"
   }
