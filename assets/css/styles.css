@@ -6301,7 +6301,7 @@ font-weight:700;
 .gta-skyline-banner {
   position: relative;
   width: min(96vw, 1650px);
-  height: clamp(170px, 14vw, 230px);
+  height: clamp(180px, 12vw, 220px);
   margin-inline: auto;
   overflow: hidden;
   background: transparent;
@@ -6320,7 +6320,7 @@ font-weight:700;
   height: 100%;
   display: block;
   object-fit: cover;
-  object-position: 50% 16%;
+  object-position: 50% 24%;
 }
 
 .home-content-layout {
@@ -7764,7 +7764,7 @@ font-weight:700;
   }
 
   .gta-skyline-banner img {
-    object-position: 50% 18%;
+    object-position: center center;
   }
 }
 
