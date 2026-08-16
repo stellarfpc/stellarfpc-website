@@ -76,7 +76,6 @@
             <nav class="footer-links" aria-label="Footer navigation">
               <a href="index.html">Home</a>
               <a href="about.html">About</a>
-              <a href="services.html">Services</a>
               <a href="faq.html">FAQ</a>
               <a href="contact.html">Contact</a>
             </nav>

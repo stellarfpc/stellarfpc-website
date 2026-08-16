@@ -2,6 +2,12 @@
 .github/
 .wrangler/
 node_modules/
+.pnpm-store/
+package/
+pnpm.cjs
+pnpm-win-x64.tgz
+pnpm-lock.yaml
+pnpm-workspace.yaml
 
 .assetsignore
 .gitignore

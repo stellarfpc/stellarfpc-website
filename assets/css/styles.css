@@ -6300,8 +6300,8 @@ font-weight:700;
 
 .gta-skyline-banner {
   position: relative;
-  width: 100%;
-  height: clamp(130px, 13vw, 190px);
+  width: min(96vw, 1600px);
+  margin-inline: auto;
   overflow: hidden;
   background: #dfe7ef;
 }
@@ -6316,10 +6316,11 @@ font-weight:700;
 
 .gta-skyline-banner img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-height: 260px;
   display: block;
-  object-fit: cover;
-  object-position: 58% 22%;
+  object-fit: contain;
+  object-position: center;
 }
 
 .home-content-layout {
@@ -7473,6 +7474,26 @@ font-weight:700;
   background: #f6f7f9;
 }
 
+.contact-map-static {
+  min-height: 420px;
+  display: grid;
+  place-content: center;
+  gap: 10px;
+  padding: 32px;
+  text-align: center;
+  color: #202833;
+}
+
+.contact-map-static strong {
+  font-size: clamp(1.55rem, 3vw, 2.45rem);
+  font-weight: 800;
+}
+
+.contact-map-static span {
+  font-size: 1rem;
+  color: #5d6672;
+}
+
 .fsp-info-projects-section {
   padding: clamp(52px, 6vw, 82px) 0;
   background: #f6f7f9;
@@ -7683,7 +7704,7 @@ font-weight:700;
 
 @media (max-width: 1000px) {
   .gta-skyline-banner {
-    height: 125px;
+    width: 96vw;
   }
 
   .home-wide-shell {
