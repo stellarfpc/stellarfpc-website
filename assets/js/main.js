@@ -496,30 +496,177 @@
     });
   }
 
-  function bindProjectRotator() {
-    const projectSlides = document.querySelectorAll(".project-slide");
-    const projectIndicators = document.querySelectorAll(".project-progress span");
+  function bindProjectGallery() {
+    const galleries = document.querySelectorAll("[data-project-gallery]");
 
-    if (projectSlides.length <= 1) {
+    if (!galleries.length) {
       return;
     }
 
-    let currentProject = 0;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    const showProject = (index) => {
-      projectSlides.forEach((slide, i) => {
-        slide.classList.toggle("active", i === index);
+    galleries.forEach((gallery) => {
+      const viewport = gallery.querySelector(".project-gallery-viewport");
+      const track = gallery.querySelector(".project-gallery-track");
+      const previousButton = gallery.querySelector("[data-project-gallery-prev]");
+      const nextButton = gallery.querySelector("[data-project-gallery-next]");
+
+      if (!viewport || !track || track.children.length <= 1) {
+        return;
+      }
+
+      const originals = Array.from(track.children);
+      originals.forEach((item) => {
+        const clone = item.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        track.appendChild(clone);
       });
 
-      projectIndicators.forEach((indicator, i) => {
-        indicator.classList.toggle("active", i === index);
-      });
-    };
+      let position = 0;
+      let loopWidth = 0;
+      let previousTimestamp = null;
+      let frameId = null;
+      let resumeTimeoutId = null;
+      let isPaused = false;
+      const speed = 34;
 
-    window.setInterval(() => {
-      currentProject = (currentProject + 1) % projectSlides.length;
-      showProject(currentProject);
-    }, 7000);
+      function measureLoop() {
+        const styles = window.getComputedStyle(track);
+        const gap = parseFloat(styles.columnGap || styles.gap || "0") || 0;
+        loopWidth = originals.reduce((sum, item) => sum + item.getBoundingClientRect().width, 0) + gap * originals.length;
+      }
+
+      function setPosition(value) {
+        if (!loopWidth) {
+          measureLoop();
+        }
+
+        position = value;
+
+        while (position <= -loopWidth) {
+          position += loopWidth;
+        }
+
+        while (position > 0) {
+          position -= loopWidth;
+        }
+
+        track.style.transform = `translate3d(${position}px, 0, 0)`;
+      }
+
+      function stopLoop() {
+        if (frameId) {
+          window.cancelAnimationFrame(frameId);
+          frameId = null;
+        }
+
+        previousTimestamp = null;
+      }
+
+      function tick(timestamp) {
+        if (isPaused || reducedMotion.matches) {
+          stopLoop();
+          return;
+        }
+
+        if (previousTimestamp === null) {
+          previousTimestamp = timestamp;
+        }
+
+        const elapsed = timestamp - previousTimestamp;
+        previousTimestamp = timestamp;
+        setPosition(position - (speed * elapsed) / 1000);
+        frameId = window.requestAnimationFrame(tick);
+      }
+
+      function startLoop() {
+        if (frameId || isPaused || reducedMotion.matches) {
+          return;
+        }
+
+        frameId = window.requestAnimationFrame(tick);
+      }
+
+      function pauseLoop() {
+        isPaused = true;
+        gallery.classList.add("is-paused");
+        stopLoop();
+      }
+
+      function resumeLoop() {
+        if (resumeTimeoutId) {
+          window.clearTimeout(resumeTimeoutId);
+          resumeTimeoutId = null;
+        }
+
+        isPaused = false;
+        gallery.classList.remove("is-paused");
+        startLoop();
+      }
+
+      function getManualStep() {
+        const firstItem = originals[0];
+
+        if (!firstItem) {
+          return viewport.clientWidth;
+        }
+
+        const styles = window.getComputedStyle(track);
+        const gap = parseFloat(styles.columnGap || styles.gap || "0") || 0;
+        return firstItem.getBoundingClientRect().width + gap;
+      }
+
+      function moveBy(direction) {
+        pauseLoop();
+        setPosition(position - direction * getManualStep());
+        if (resumeTimeoutId) {
+          window.clearTimeout(resumeTimeoutId);
+        }
+        resumeTimeoutId = window.setTimeout(resumeLoop, 1800);
+      }
+
+      previousButton?.addEventListener("click", () => moveBy(-1));
+      nextButton?.addEventListener("click", () => moveBy(1));
+      gallery.addEventListener("mouseenter", pauseLoop);
+      gallery.addEventListener("mouseleave", resumeLoop);
+      gallery.addEventListener("focusin", pauseLoop);
+      gallery.addEventListener("focusout", (event) => {
+        if (!gallery.contains(event.relatedTarget)) {
+          resumeLoop();
+        }
+      });
+      gallery.addEventListener("touchstart", pauseLoop, { passive: true });
+      gallery.addEventListener("touchend", resumeLoop);
+
+      window.addEventListener("resize", () => {
+        measureLoop();
+        setPosition(position);
+      });
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          stopLoop();
+        } else {
+          startLoop();
+        }
+      });
+
+      if (typeof reducedMotion.addEventListener === "function") {
+        reducedMotion.addEventListener("change", () => {
+          if (reducedMotion.matches) {
+            stopLoop();
+            setPosition(0);
+          } else {
+            startLoop();
+          }
+        });
+      }
+
+      measureLoop();
+      gallery.classList.add("is-ready");
+      setPosition(0);
+      startLoop();
+    });
   }
 
   document.querySelectorAll("[data-component='site-header']").forEach(renderHeader);
@@ -532,5 +679,5 @@
   bindCarousels();
   bindServiceCarousels();
   bindShieldRotators();
-  bindProjectRotator();
+  bindProjectGallery();
 })();

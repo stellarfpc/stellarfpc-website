@@ -6282,6 +6282,7 @@ font-weight:700;
 }
 
 .simple-home {
+  overflow-x: hidden;
   color: var(--stellar-text);
   background: #fff;
 }
@@ -6289,6 +6290,67 @@ font-weight:700;
 .simple-home .container {
   width: min(calc(100% - 40px), var(--stellar-container));
   margin-inline: auto;
+}
+
+.gta-skyline-banner {
+  position: relative;
+  height: clamp(220px, 23vw, 300px);
+  overflow: hidden;
+  background: #dfe7ef;
+}
+
+.gta-skyline-banner::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(18, 26, 38, .08), rgba(18, 26, 38, .18));
+  content: "";
+}
+
+.gta-skyline-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+}
+
+.home-content-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
+  gap: clamp(32px, 4vw, 48px);
+  align-items: start;
+}
+
+.home-content-main {
+  min-width: 0;
+}
+
+.home-service-rail {
+  position: sticky;
+  top: 118px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-self: start;
+  padding: clamp(58px, 8vw, 94px) 0 32px;
+}
+
+.home-service-rail a {
+  color: var(--stellar-navy);
+  font-size: clamp(13px, 1vw, 15px);
+  font-weight: 750;
+  letter-spacing: .035em;
+  line-height: 1.35;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color .2s ease, transform .2s ease;
+}
+
+.home-service-rail a:hover,
+.home-service-rail a:focus-visible {
+  color: var(--stellar-red);
+  outline: none;
+  transform: translateX(4px);
 }
 
 .btn {
@@ -7283,8 +7345,17 @@ font-weight:700;
   align-items: start;
 }
 
+.home-content-main .fsp-info-projects-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(42px, 6vw, 68px);
+}
+
 .fsp-info-content {
   max-width: 620px;
+}
+
+.home-content-main .fsp-info-content {
+  max-width: 760px;
 }
 
 .fsp-info-content h2 {
@@ -7327,7 +7398,7 @@ font-weight:700;
 }
 
 .projects-header {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .projects-header h3 {
@@ -7341,95 +7412,119 @@ font-weight:700;
   text-transform: uppercase;
 }
 
-.project-rotator {
-  position: relative;
-  min-height: 470px;
-}
-
-.project-slide {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  background: #fff;
-  border: 1px solid #e0e4e8;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(4px);
-  transition: opacity .55s ease, transform .55s ease, visibility .55s ease;
-}
-
-.project-slide.active {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.project-image {
-  height: 260px;
-  background-color: #dfe3e8;
-  background-position: center;
-  background-size: cover;
-}
-
-.project-image-1 {
-  background-image: linear-gradient(rgba(18, 26, 38, .12), rgba(18, 26, 38, .12)), url("../images/building-residential.jpg");
-}
-
-.project-image-2 {
-  background-image: linear-gradient(rgba(18, 26, 38, .12), rgba(18, 26, 38, .12)), url("../images/fsp-assembly-anonymized.jpg");
-}
-
-.project-image-3 {
-  background-image: linear-gradient(rgba(18, 26, 38, .12), rgba(18, 26, 38, .12)), url("../images/commercial.jpg");
-}
-
-.project-image-4 {
-  background-image: linear-gradient(rgba(18, 26, 38, .12), rgba(18, 26, 38, .12)), url("../images/KTV FSP.jpg");
-}
-
-.project-slide-content {
-  padding: 24px 25px 26px;
-}
-
-.project-slide-content > span {
-  display: block;
-  margin-bottom: 8px;
-  color: var(--stellar-red);
-  font-size: 10px;
-  font-weight: 850;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-
-.project-slide-content h4 {
-  margin: 0 0 9px;
-  color: var(--stellar-navy);
-  font-size: 21px;
-  letter-spacing: 0;
-}
-
-.project-slide-content p {
-  margin: 0;
+.projects-header p {
+  margin-top: 9px;
   color: #68717c;
   font-size: 14px;
-  line-height: 1.65;
+  line-height: 1.5;
 }
 
-.project-progress {
+.project-gallery-carousel {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.project-gallery-viewport {
+  overflow: hidden;
+  width: 100%;
+  padding: 4px;
+}
+
+.project-gallery-track {
   display: flex;
-  gap: 7px;
-  margin-top: 16px;
+  gap: 18px;
+  width: max-content;
+  will-change: transform;
 }
 
-.project-progress span {
-  width: 28px;
-  height: 3px;
-  background: #ccd1d7;
-  transition: background .25s ease;
+.project-gallery-carousel.is-css-loop .project-gallery-track {
+  animation: project-gallery-loop 42s linear infinite;
 }
 
-.project-progress span.active {
-  background: var(--stellar-red);
+.project-gallery-carousel.is-paused .project-gallery-track,
+.project-gallery-carousel:hover .project-gallery-track,
+.project-gallery-carousel:focus-within .project-gallery-track {
+  animation-play-state: paused;
+}
+
+.project-gallery-item {
+  flex: 0 0 clamp(220px, calc((100vw - 410px) / 3), 270px);
+  aspect-ratio: 16 / 10;
+  margin: 0;
+  overflow: hidden;
+  background: #dfe3e8;
+  border-radius: 8px;
+  box-shadow: 0 16px 34px rgba(18, 26, 38, .13);
+}
+
+.project-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform .35s ease, filter .35s ease;
+}
+
+.project-gallery-item:hover img {
+  filter: saturate(1.04) contrast(1.03);
+  transform: scale(1.025);
+}
+
+.project-gallery-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  padding: 0;
+  background: rgba(255, 255, 255, .92);
+  border: 1px solid rgba(207, 213, 220, .9);
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(18, 26, 38, .16);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+.project-gallery-arrow::before {
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid var(--stellar-navy);
+  border-left: 2px solid var(--stellar-navy);
+  content: "";
+}
+
+.project-gallery-arrow:hover,
+.project-gallery-arrow:focus-visible {
+  background: #fff;
+  border-color: var(--stellar-red);
+  outline: none;
+  transform: translateY(-50%) scale(1.04);
+}
+
+.project-gallery-arrow-prev {
+  left: -13px;
+}
+
+.project-gallery-arrow-prev::before {
+  transform: translateX(2px) rotate(-45deg);
+}
+
+.project-gallery-arrow-next {
+  right: -13px;
+}
+
+.project-gallery-arrow-next::before {
+  transform: translateX(-2px) rotate(135deg);
+}
+
+@keyframes project-gallery-loop {
+  to {
+    transform: translateX(calc(-50% - 9px));
+  }
 }
 
 @media (max-width: 850px) {
@@ -7452,12 +7547,40 @@ font-weight:700;
     max-width: none;
   }
 
-  .project-rotator {
-    min-height: 455px;
-  }
-
   .municipal-badge-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1000px) {
+  .gta-skyline-banner {
+    height: clamp(150px, 34vw, 190px);
+  }
+
+  .home-content-layout {
+    display: block;
+    width: min(calc(100% - 32px), var(--stellar-container));
+  }
+
+  .home-service-rail {
+    display: none;
+  }
+
+  .project-gallery-item {
+    flex-basis: min(78vw, 390px);
+  }
+
+  .project-gallery-arrow {
+    width: 34px;
+    height: 34px;
+  }
+
+  .project-gallery-arrow-prev {
+    left: 6px;
+  }
+
+  .project-gallery-arrow-next {
+    right: 6px;
   }
 }
 
