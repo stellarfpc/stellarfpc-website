@@ -6301,39 +6301,42 @@ font-weight:700;
   overflow: visible;
 }
 
-.home-wide-shell::before {
-  position: absolute;
-  top: -28px;
-  left: 50%;
-  z-index: 0;
-  width: 100vw;
-  height: clamp(520px, 58vw, 860px);
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .8) 78%, #fff), url("../images/toronto-homepage-banner.jpg") center top / cover no-repeat;
-  content: "";
-  opacity: .5;
-  transform: translateX(-50%);
-}
-
 .gta-skyline-banner {
   position: relative;
+  z-index: 0;
   width: 100vw;
   height: clamp(220px, 14vw, 250px);
   margin-left: calc(50% - 50vw);
   margin-bottom: 28px;
-  overflow: hidden;
+  overflow: visible;
   background: transparent;
+}
+
+.gta-skyline-banner::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: clamp(520px, 58vw, 860px);
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 26%, rgba(255, 255, 255, .74) 72%, #fff), url("../images/toronto-skyline-blue-banner.png") center center / cover no-repeat;
+  content: "";
+  opacity: .5;
 }
 
 .gta-skyline-banner::after {
   position: absolute;
   inset: 0;
+  z-index: 3;
   pointer-events: none;
   background: linear-gradient(180deg, rgba(18, 26, 38, .08), rgba(18, 26, 38, .18));
   content: "";
 }
 
 .gta-skyline-banner img {
+  position: relative;
+  z-index: 2;
   width: 100%;
   height: 100%;
   display: block;
