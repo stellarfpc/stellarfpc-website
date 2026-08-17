@@ -6282,6 +6282,7 @@ font-weight:700;
 }
 
 .simple-home {
+  position: relative;
   overflow: visible;
   color: var(--stellar-text);
   background: #fff;
@@ -6293,9 +6294,25 @@ font-weight:700;
 }
 
 .home-wide-shell {
+  position: relative;
+  isolation: isolate;
   width: min(94vw, 1480px);
   margin-inline: auto;
   overflow: visible;
+}
+
+.home-wide-shell::before {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  z-index: 0;
+  width: 100vw;
+  height: clamp(520px, 58vw, 860px);
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .8) 78%, #fff), url("../images/toronto-homepage-banner.jpg") center top / cover no-repeat;
+  content: "";
+  opacity: .5;
+  transform: translateX(-50%);
 }
 
 .gta-skyline-banner {
@@ -6325,6 +6342,8 @@ font-weight:700;
 }
 
 .home-content-layout {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 280px minmax(0, 1fr);
   gap: clamp(40px, 3.5vw, 62px);
@@ -6511,7 +6530,7 @@ font-weight:700;
 
 .simple-hero {
   padding: clamp(24px, 3.2vw, 44px) 0 0;
-  background: radial-gradient(circle at 85% 15%, rgba(180, 32, 42, .09), transparent 32%), #fff;
+  background: radial-gradient(circle at 85% 15%, rgba(180, 32, 42, .09), transparent 32%), rgba(255, 255, 255, .88);
 }
 
 .simple-hero-grid {
