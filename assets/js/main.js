@@ -182,14 +182,20 @@
     const requestedService = new URLSearchParams(window.location.search).get("service");
 
     if (serviceSelect && requestedService) {
-      const option = Array.from(serviceSelect.options).find((item) => item.value === requestedService || item.textContent === requestedService);
+      const serviceAliases = {
+        "Fire Safety Plans & Training": "Fire Safety Plan Preparation",
+        "Fire Code Compliance Consulting": "Inspection Order Solutions",
+        "Fire Sprinkler System Design": "Fire Sprinkler System Design",
+      };
+      const preferredService = serviceAliases[requestedService] || requestedService;
+      const option = Array.from(serviceSelect.options).find((item) => item.value === preferredService || item.textContent === preferredService);
 
       if (option) {
         serviceSelect.value = option.value;
       }
     }
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
       if (form.dataset.submitPending === "true") {
@@ -198,41 +204,69 @@
 
       form.dataset.submitPending = "true";
 
-      const data = new FormData(form);
-      const lines = [
-        `Name: ${data.get("name") || ""}`,
-        `Email: ${data.get("email") || ""}`,
-        `Phone: ${data.get("phone") || ""}`,
-        `Company / Organization: ${data.get("company") || ""}`,
-        `Building Address: ${data.get("buildingAddress") || ""}`,
-        `Service Needed: ${data.get("service") || ""}`,
-        "",
-        "Message:",
-        data.get("message") || "",
-      ];
-
-      const subject = encodeURIComponent("StellarFPC Consultation Request");
-      const body = encodeURIComponent(lines.join("\n"));
-      const mailtoUrl = `mailto:info@stellarfpc.com?subject=${subject}&body=${body}`;
-
       const submitButton = form.querySelector("button[type='submit']");
+      const status = form.querySelector("[data-contact-form-status]");
+      const originalButtonText = submitButton ? submitButton.textContent : "";
 
       if (submitButton) {
         submitButton.disabled = true;
-        submitButton.textContent = "Email app opened";
+        submitButton.textContent = "Submitting...";
       }
 
-      if (typeof window.gtagSendEvent === "function") {
-        window.gtagSendEvent(mailtoUrl);
-      } else if (typeof gtagSendEvent === "function") {
-        gtagSendEvent(mailtoUrl);
-      } else {
-        window.location.href = mailtoUrl;
+      if (status) {
+        status.hidden = true;
+        status.textContent = "";
       }
 
-      window.setTimeout(() => {
-        window.location.href = "contact-confirmation.html";
-      }, 30000);
+      const formData = new FormData(form);
+      const turnstileToken = formData.get("cf-turnstile-response");
+
+      if (!turnstileToken) {
+        if (status) {
+          status.textContent = "Please complete the security check and try again.";
+          status.hidden = false;
+        }
+
+        form.dataset.submitPending = "false";
+
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
+
+        return;
+      }
+
+      try {
+        const response = await fetch("/api/quote", {
+          method: "POST",
+          body: formData,
+        });
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok || !result.success) {
+          throw new Error("Submission failed");
+        }
+
+        sessionStorage.setItem("stellar_quote_submitted", "1");
+        window.location.href = "thank-you.html";
+      } catch (error) {
+        if (status) {
+          status.innerHTML = 'We could not submit your request. Please try again or contact <a href="mailto:info@stellarfpc.com">info@stellarfpc.com</a>.';
+          status.hidden = false;
+        }
+
+        form.dataset.submitPending = "false";
+
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
+
+        if (window.turnstile && typeof window.turnstile.reset === "function") {
+          window.turnstile.reset(form.querySelector(".cf-turnstile"));
+        }
+      }
     });
   }
 

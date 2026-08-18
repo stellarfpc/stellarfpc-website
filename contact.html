@@ -17,27 +17,7 @@ gtag('js', new Date());
 gtag('config', 'G-6QYTV65LMD');
 gtag('config', 'AW-18306917629');
 </script>
-<!-- Google Ads Request Quote conversion -->
-<script>
-function gtagSendEvent(url) {
-  var callback = function () {
-    if (typeof url === 'string') {
-      window.location.href = url;
-    }
-  };
-
-  if (typeof gtag === 'function') {
-    gtag('event', 'ads_conversion_Request_quote_1', {
-      'event_callback': callback,
-      'event_timeout': 2000
-    });
-  } else {
-    callback();
-  }
-
-  return false;
-}
-</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -96,7 +76,8 @@ function gtagSendEvent(url) {
             </div>
           </div>
 
-          <form class="contact-form reveal-on-scroll" data-contact-form>
+          <form class="contact-form reveal-on-scroll" data-contact-form action="/api/quote" method="post">
+            <input type="hidden" name="source" value="StellarFPC Website">
             <div class="form-grid">
               <label>
                 <span>Name</span>
@@ -134,8 +115,12 @@ function gtagSendEvent(url) {
                 <textarea name="message" rows="6" required></textarea>
               </label>
             </div>
+            <div class="turnstile-field">
+              <div class="cf-turnstile" data-sitekey="0x4AAAAAAETeo7bCItWuuZdf"></div>
+            </div>
+            <p class="form-status" role="status" aria-live="polite" hidden data-contact-form-status></p>
             <button class="button button-primary" type="submit">Request Consultation</button>
-            <p class="form-note">This form opens your email app. Drawings, photos, inspection orders, Fire Safety Plan documents, or other attachments can be emailed directly to <a href="mailto:info@stellarfpc.com">info@stellarfpc.com</a>.</p>
+            <p class="form-note">This form submits your request securely through the website. Drawings, photos, inspection orders, Fire Safety Plan documents, or other attachments can still be emailed directly to <a href="mailto:info@stellarfpc.com">info@stellarfpc.com</a>.</p>
           </form>
         </div>
       </section>
