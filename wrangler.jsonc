@@ -3,6 +3,7 @@
   "name": "stellarfpc-website",
   "main": "worker/index.js",
   "compatibility_date": "2026-08-18",
+  "keep_vars": true,
   "workers_dev": true,
   "assets": {
     "directory": "./public",
