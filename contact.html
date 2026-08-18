@@ -15,35 +15,53 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 
 gtag('config', 'G-6QYTV65LMD');
+gtag('config', 'AW-18306917629');
+</script>
+<!-- Google Ads Request Quote conversion -->
+<script>
+function gtagSendEvent(url) {
+  var callback = function () {
+    if (typeof url === 'string') {
+      window.location.href = url;
+    }
+  };
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'ads_conversion_Request_quote_1', {
+      'event_callback': callback,
+      'event_timeout': 2000
+    });
+  } else {
+    callback();
+  }
+
+  return false;
+}
 </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <div data-component="site-header"></div>
 
-    <main id="main">
-      <section class="contact-hero" aria-labelledby="page-title">
-        <div class="page-shell contact-hero-grid">
-          <div class="contact-hero-copy reveal-on-scroll">
-            <p class="eyebrow">Contact</p>
-            <h1 id="page-title">Request a Consultation</h1>
-            <p class="lede">Tell us about your sprinkler design, Fire Safety Plan, code compliance, inspection order, or fire safety concern. We will review your message and respond with the next practical step.</p>
-          </div>
-          <div class="hero-capability-badge reveal-on-scroll" aria-label="Rotating StellarFPC contact support">
-            <div class="capability-shield capability-shield-contact">
-              <span class="shield-ring" aria-hidden="true"></span>
-              <span class="shield-mark" aria-hidden="true"></span>
-              <p class="shield-kicker">Capability</p>
-              <div class="shield-rotator" data-shield-rotator>
-                <span>Request Consultation</span>
-                <span>Fast Response</span>
-                <span>Practical Guidance</span>
-                <span>Ontario Fire Protection Support</span>
-              </div>
-            </div>
-          </div>
+    <main id="main" class="contact-page">
+      <div class="page-city-backgrounds" aria-hidden="true">
+        <div class="page-city-stack page-city-stack-left">
+          <img class="page-city-background" src="assets/images/city-oakville.jpg" alt="">
+          <img class="page-city-background" src="assets/images/city-richmond-hill.jpg" alt="">
+          <img class="page-city-background" src="assets/images/city-burlington.jpg" alt="">
+          <img class="page-city-background" src="assets/images/city-milton.jpg" alt="">
+          <img class="page-city-background" src="assets/images/city-ajax.jpg" alt="">
+          <img class="page-city-background" src="assets/images/city-oshawa.jpg" alt="">
         </div>
-      </section>
+        <div class="page-city-stack page-city-stack-right">
+          <img class="page-city-background" src="assets/images/city-pickering.jpg" alt="">
+          <img class="page-city-background" src="assets/images/city-toronto.jpg" alt="">
+          <img class="page-city-background" src="assets/images/city-mississauga.jpg" alt="">
+          <img class="page-city-background" src="assets/images/city-brampton.jpg" alt="">
+          <img class="page-city-background" src="assets/images/city-markham.jpg" alt="">
+          <img class="page-city-background" src="assets/images/city-vaughan.jpg" alt="">
+        </div>
+      </div>
 
       <section class="section contact-main-section" aria-labelledby="help-title">
         <div class="page-shell contact-layout">
@@ -58,15 +76,21 @@ gtag('config', 'G-6QYTV65LMD');
                 <a href="mailto:info@stellarfpc.com">info@stellarfpc.com</a>
               </div>
               <div>
+                <h3>Phone</h3>
+                <a href="tel:+14165744683">416-574-4683</a>
+              </div>
+              <div>
                 <h3>Service area</h3>
                 <p>Ontario, Canada</p>
               </div>
               <div>
                 <h3>Services</h3>
                 <ul>
-                  <li>Fire Sprinkler System Design</li>
-                  <li>Fire Safety Plans &amp; Training</li>
-                  <li>Fire Code Compliance Consulting</li>
+                  <li><a href="fire-safety-plan.html">Fire Safety Plan Preparation</a></li>
+                  <li><a href="fire-safety-plan.html">Fire Safety Plan Training</a></li>
+                  <li><a href="fire-safety-plan.html">Proactive Fire Safety Compliance Program</a></li>
+                  <li><a href="fire-inspection-order.html">Inspection Order Solutions</a></li>
+                  <li><a href="fire-sprinkler-design.html">Fire Sprinkler System Design</a></li>
                 </ul>
               </div>
             </div>
@@ -97,9 +121,11 @@ gtag('config', 'G-6QYTV65LMD');
               <label class="form-span">
                 <span>Service Needed</span>
                 <select name="service">
+                  <option>Fire Safety Plan Preparation</option>
+                  <option>Fire Safety Plan Training</option>
+                  <option>Proactive Fire Safety Compliance Program</option>
+                  <option>Inspection Order Solutions</option>
                   <option>Fire Sprinkler System Design</option>
-                  <option>Fire Safety Plans &amp; Training</option>
-                  <option>Fire Code Compliance Consulting</option>
                   <option>Not Sure</option>
                 </select>
               </label>
@@ -114,49 +140,6 @@ gtag('config', 'G-6QYTV65LMD');
         </div>
       </section>
 
-      <section class="section contact-process-section" aria-labelledby="include-title">
-        <div class="page-shell">
-          <div class="section-heading reveal-on-scroll">
-            <p class="eyebrow">Contact CTA / Process</p>
-            <h2 id="include-title">What to Include</h2>
-          </div>
-          <div class="contact-process-grid">
-            <article class="contact-process-card reveal-on-scroll">
-              <span aria-hidden="true"></span>
-              <h3>Building address</h3>
-            </article>
-            <article class="contact-process-card reveal-on-scroll">
-              <span aria-hidden="true"></span>
-              <h3>Service or concern</h3>
-            </article>
-            <article class="contact-process-card reveal-on-scroll">
-              <span aria-hidden="true"></span>
-              <h3>Timeline or due date</h3>
-            </article>
-            <article class="contact-process-card reveal-on-scroll">
-              <span aria-hidden="true"></span>
-              <h3>Available documents</h3>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section contact-map-section" aria-labelledby="location-title">
-        <div class="page-shell">
-          <div class="section-heading">
-            <p class="eyebrow">Location</p>
-            <h2 id="location-title">Our Location</h2>
-            <p>Stellar Fire Protection &amp; Code Consulting</p>
-          </div>
-
-          <div class="contact-map contact-map-placeholder">
-            <div class="contact-map-static" role="img" aria-label="Stellar Fire Protection and Code Consulting serves Ontario, Canada">
-              <strong>Ontario, Canada</strong>
-              <span>Serving the GTA and communities across Ontario</span>
-            </div>
-          </div>
-        </div>
-      </section>
     </main>
 
     <div data-component="site-footer"></div>

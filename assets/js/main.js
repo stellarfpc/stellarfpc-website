@@ -192,6 +192,12 @@
     form.addEventListener("submit", (event) => {
       event.preventDefault();
 
+      if (form.dataset.submitPending === "true") {
+        return;
+      }
+
+      form.dataset.submitPending = "true";
+
       const data = new FormData(form);
       const lines = [
         `Name: ${data.get("name") || ""}`,
@@ -207,7 +213,46 @@
 
       const subject = encodeURIComponent("StellarFPC Consultation Request");
       const body = encodeURIComponent(lines.join("\n"));
-      window.location.href = `mailto:info@stellarfpc.com?subject=${subject}&body=${body}`;
+      const mailtoUrl = `mailto:info@stellarfpc.com?subject=${subject}&body=${body}`;
+
+      const submitButton = form.querySelector("button[type='submit']");
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Email app opened";
+      }
+
+      if (typeof window.gtagSendEvent === "function") {
+        window.gtagSendEvent(mailtoUrl);
+      } else if (typeof gtagSendEvent === "function") {
+        gtagSendEvent(mailtoUrl);
+      } else {
+        window.location.href = mailtoUrl;
+      }
+
+      window.setTimeout(() => {
+        window.location.href = "contact-confirmation.html";
+      }, 30000);
+    });
+  }
+
+  function bindConfirmationPage() {
+    const dialog = document.querySelector("[data-confirmation-dialog]");
+    const yesButton = document.querySelector("[data-confirmation-yes]");
+    const closeButton = document.querySelector("[data-confirmation-close]");
+
+    if (!dialog || !yesButton || !closeButton) {
+      return;
+    }
+
+    yesButton.addEventListener("click", () => {
+      dialog.hidden = false;
+      closeButton.focus();
+    });
+
+    closeButton.addEventListener("click", () => {
+      dialog.hidden = true;
+      yesButton.focus();
     });
   }
 
@@ -675,6 +720,7 @@
   bindHeaderScrollState();
   bindRevealAnimation();
   bindContactForm();
+  bindConfirmationPage();
   bindCarousels();
   bindServiceCarousels();
   bindShieldRotators();
