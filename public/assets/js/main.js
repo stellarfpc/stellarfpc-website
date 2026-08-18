@@ -1,0 +1,762 @@
+(function () {
+  const leadingNavItems = [
+    { label: "Home", href: "index.html" },
+    { label: "About", href: "about.html" },
+  ];
+
+  const trailingNavItems = [
+    { label: "FAQ", href: "faq.html" },
+    { label: "Contact", href: "contact.html" },
+  ];
+
+  const servicesItems = [
+    { label: "Fire Safety Plan & Training", href: "fire-safety-plan.html" },
+    { label: "Fire Inspection Order Solutions", href: "fire-inspection-order.html" },
+    { label: "Fire Sprinkler Design", href: "fire-sprinkler-design.html" },
+  ];
+
+  const currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+  function renderHeader(target) {
+    const leadingLinks = leadingNavItems
+      .map((item) => {
+        const current = item.href === currentPage ? ' aria-current="page"' : "";
+        return `<a class="nav-link" href="${item.href}"${current}>${item.label}</a>`;
+      })
+      .join("");
+
+    const trailingLinks = trailingNavItems
+      .map((item) => {
+        const current = item.href === currentPage ? ' aria-current="page"' : "";
+        return `<a class="nav-link" href="${item.href}"${current}>${item.label}</a>`;
+      })
+      .join("");
+
+    const servicesMenu = servicesItems
+      .map((item) => `<a href="${item.href}">${item.label}</a>`)
+      .join("");
+
+    target.innerHTML = `
+      <header class="site-header">
+        <div class="nav-shell">
+          <a class="brand" href="index.html" aria-label="StellarFPC home">
+            <img class="brand-logo" src="assets/images/stellarfpc-logo-horizontal.png" alt="StellarFPC">
+          </a>
+          <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+            <span class="nav-toggle-lines" aria-hidden="true"></span>
+            <span class="visually-hidden">Menu</span>
+          </button>
+          <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation">
+            ${leadingLinks}
+            <div class="nav-dropdown">
+              <button class="dropdown-toggle" type="button" aria-expanded="false">Services</button>
+              <div class="dropdown-menu">
+                ${servicesMenu}
+              </div>
+            </div>
+            ${trailingLinks}
+            <a class="nav-link nav-cta" href="contact.html?service=Fire%20Safety%20Plans%20%26%20Training">Get a Free Quote</a>
+          </nav>
+        </div>
+      </header>
+    `;
+  }
+
+  function renderFooter(target) {
+    target.innerHTML = `
+      <footer class="site-footer">
+        <div class="footer-shell">
+          <section class="footer-column" aria-labelledby="footer-contact">
+            <img class="footer-brand-logo" src="assets/images/stellarfpc-logo-horizontal.png" alt="StellarFPC">
+            <h2 id="footer-contact">StellarFPC</h2>
+            <p>Fire protection engineering and code consulting solutions across Ontario.</p>
+          </section>
+          <section class="footer-column" aria-labelledby="footer-links">
+            <h3 id="footer-links">Quick Links</h3>
+            <nav class="footer-links" aria-label="Footer navigation">
+              <a href="index.html">Home</a>
+              <a href="about.html">About</a>
+              <a href="faq.html">FAQ</a>
+              <a href="contact.html">Contact</a>
+            </nav>
+          </section>
+          <section class="footer-column" aria-labelledby="footer-services">
+            <h3 id="footer-services">Services</h3>
+            <nav class="footer-links" aria-label="Footer services navigation">
+              <a href="fire-safety-plan.html">Fire Safety Plan &amp; Training</a>
+              <a href="fire-inspection-order.html">Fire Inspection Order Solutions</a>
+              <a href="fire-sprinkler-design.html">Fire Sprinkler Design</a>
+            </nav>
+          </section>
+          <section class="footer-column" aria-labelledby="footer-email">
+            <h3 id="footer-email">Contact</h3>
+            <a href="mailto:info@stellarfpc.com">info@stellarfpc.com</a>
+          </section>
+          <div class="footer-bottom">&copy; Stellar Fire Protection &amp; Code Consulting. All rights reserved.</div>
+        </div>
+      </footer>
+    `;
+  }
+
+  function bindNavigation() {
+    const toggle = document.querySelector(".nav-toggle");
+    const nav = document.querySelector(".primary-nav");
+
+    if (!toggle || !nav) {
+      return;
+    }
+
+    toggle.addEventListener("click", () => {
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!expanded));
+      nav.classList.toggle("is-open", !expanded);
+    });
+  }
+
+  function bindDropdowns() {
+    document.querySelectorAll(".dropdown-toggle").forEach((toggle) => {
+      const dropdown = toggle.closest(".nav-dropdown");
+
+      if (!dropdown) {
+        return;
+      }
+
+      toggle.addEventListener("click", () => {
+        const expanded = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!expanded));
+        dropdown.classList.toggle("is-open", !expanded);
+      });
+    });
+  }
+
+  function bindHeaderScrollState() {
+    const header = document.querySelector(".site-header");
+
+    if (!header) {
+      return;
+    }
+
+    function updateHeaderState() {
+      header.classList.toggle("is-scrolled", window.scrollY > 12);
+    }
+
+    updateHeaderState();
+    window.addEventListener("scroll", updateHeaderState, { passive: true });
+  }
+
+  function bindRevealAnimation() {
+    const elements = document.querySelectorAll(".reveal-on-scroll");
+
+    if (!elements.length) {
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.12 }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+  }
+
+  function bindContactForm() {
+    const form = document.querySelector("[data-contact-form]");
+
+    if (!form) {
+      return;
+    }
+
+    const serviceSelect = form.querySelector("[name='service']");
+    const requestedService = new URLSearchParams(window.location.search).get("service");
+
+    if (serviceSelect && requestedService) {
+      const serviceAliases = {
+        "Fire Safety Plans & Training": "Fire Safety Plan Preparation",
+        "Fire Code Compliance Consulting": "Inspection Order Solutions",
+        "Fire Sprinkler System Design": "Fire Sprinkler System Design",
+      };
+      const preferredService = serviceAliases[requestedService] || requestedService;
+      const option = Array.from(serviceSelect.options).find((item) => item.value === preferredService || item.textContent === preferredService);
+
+      if (option) {
+        serviceSelect.value = option.value;
+      }
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (form.dataset.submitPending === "true") {
+        return;
+      }
+
+      form.dataset.submitPending = "true";
+
+      const submitButton = form.querySelector("button[type='submit']");
+      const status = form.querySelector("[data-contact-form-status]");
+      const originalButtonText = submitButton ? submitButton.textContent : "";
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+      }
+
+      if (status) {
+        status.hidden = true;
+        status.textContent = "";
+      }
+
+      const formData = new FormData(form);
+      const turnstileToken = formData.get("cf-turnstile-response");
+
+      if (!turnstileToken) {
+        if (status) {
+          status.textContent = "Please complete the security check and try again.";
+          status.hidden = false;
+        }
+
+        form.dataset.submitPending = "false";
+
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
+
+        return;
+      }
+
+      try {
+        const response = await fetch("/api/quote", {
+          method: "POST",
+          body: formData,
+        });
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok || !result.success) {
+          throw new Error("Submission failed");
+        }
+
+        sessionStorage.setItem("stellar_quote_submitted", "1");
+        window.location.href = "thank-you.html";
+      } catch (error) {
+        if (status) {
+          status.innerHTML = 'We could not submit your request. Please try again or contact <a href="mailto:info@stellarfpc.com">info@stellarfpc.com</a>.';
+          status.hidden = false;
+        }
+
+        form.dataset.submitPending = "false";
+
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
+
+        if (window.turnstile && typeof window.turnstile.reset === "function") {
+          window.turnstile.reset(form.querySelector(".cf-turnstile"));
+        }
+      }
+    });
+  }
+
+  function bindConfirmationPage() {
+    const dialog = document.querySelector("[data-confirmation-dialog]");
+    const yesButton = document.querySelector("[data-confirmation-yes]");
+    const closeButton = document.querySelector("[data-confirmation-close]");
+
+    if (!dialog || !yesButton || !closeButton) {
+      return;
+    }
+
+    yesButton.addEventListener("click", () => {
+      dialog.hidden = false;
+      closeButton.focus();
+    });
+
+    closeButton.addEventListener("click", () => {
+      dialog.hidden = true;
+      yesButton.focus();
+    });
+  }
+
+  function bindCarousels() {
+    const carousels = document.querySelectorAll("[data-carousel]");
+
+    if (!carousels.length) {
+      return;
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    carousels.forEach((carousel) => {
+      let timerId = null;
+      let isPaused = false;
+
+      function getStepSize() {
+        const firstCard = carousel.firstElementChild;
+
+        if (!firstCard) {
+          return carousel.clientWidth;
+        }
+
+        const styles = window.getComputedStyle(carousel);
+        const gap = parseFloat(styles.columnGap || styles.gap || "0") || 0;
+        return firstCard.getBoundingClientRect().width + gap;
+      }
+
+      function advanceCarousel() {
+        if (isPaused || reducedMotion.matches || carousel.scrollWidth <= carousel.clientWidth) {
+          return;
+        }
+
+        const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+        const nextScrollLeft = carousel.scrollLeft >= maxScrollLeft - 4 ? 0 : Math.min(carousel.scrollLeft + getStepSize(), maxScrollLeft);
+
+        carousel.scrollTo({
+          left: nextScrollLeft,
+          behavior: "smooth",
+        });
+      }
+
+      function startCarousel() {
+        if (reducedMotion.matches || timerId) {
+          return;
+        }
+
+        timerId = window.setInterval(advanceCarousel, 5000);
+      }
+
+      function stopCarousel() {
+        if (!timerId) {
+          return;
+        }
+
+        window.clearInterval(timerId);
+        timerId = null;
+      }
+
+      function pauseCarousel() {
+        isPaused = true;
+        stopCarousel();
+      }
+
+      function resumeCarousel() {
+        isPaused = false;
+        startCarousel();
+      }
+
+      carousel.addEventListener("mouseenter", pauseCarousel);
+      carousel.addEventListener("mouseleave", resumeCarousel);
+      carousel.addEventListener("focusin", pauseCarousel);
+      carousel.addEventListener("focusout", (event) => {
+        if (!carousel.contains(event.relatedTarget)) {
+          resumeCarousel();
+        }
+      });
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          stopCarousel();
+        } else if (!isPaused) {
+          startCarousel();
+        }
+      });
+
+      if (typeof reducedMotion.addEventListener === "function") {
+        reducedMotion.addEventListener("change", () => {
+          if (reducedMotion.matches) {
+            stopCarousel();
+          } else if (!isPaused) {
+            startCarousel();
+          }
+        });
+      }
+
+      startCarousel();
+    });
+  }
+
+  function bindServiceCarousels() {
+    const carousels = document.querySelectorAll("[data-service-carousel]");
+
+    if (!carousels.length) {
+      return;
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    carousels.forEach((carousel) => {
+      const slides = Array.from(carousel.querySelectorAll("[data-service-slide]"));
+      const dots = Array.from(carousel.querySelectorAll("[data-service-dot]"));
+      const previousButton = carousel.querySelector("[data-service-prev]");
+      const nextButton = carousel.querySelector("[data-service-next]");
+      const interval = Number(carousel.dataset.interval || 6000);
+      let activeIndex = Math.max(0, slides.findIndex((slide) => slide.classList.contains("is-active")));
+      let timerId = null;
+      let isPaused = false;
+
+      if (slides.length <= 1) {
+        return;
+      }
+
+      function showSlide(index) {
+        activeIndex = (index + slides.length) % slides.length;
+
+        slides.forEach((slide, slideIndex) => {
+          const active = slideIndex === activeIndex;
+          slide.classList.toggle("is-active", active);
+          slide.setAttribute("aria-hidden", String(!active));
+        });
+
+        dots.forEach((dot, dotIndex) => {
+          const active = dotIndex === activeIndex;
+          dot.classList.toggle("is-active", active);
+          dot.setAttribute("aria-selected", String(active));
+          dot.tabIndex = active ? 0 : -1;
+        });
+      }
+
+      function stopCarousel() {
+        if (!timerId) {
+          return;
+        }
+
+        window.clearInterval(timerId);
+        timerId = null;
+      }
+
+      function startCarousel() {
+        if (reducedMotion.matches || isPaused || timerId) {
+          return;
+        }
+
+        timerId = window.setInterval(() => showSlide(activeIndex + 1), interval);
+      }
+
+      function pauseCarousel() {
+        isPaused = true;
+        stopCarousel();
+      }
+
+      function resumeCarousel() {
+        isPaused = false;
+        startCarousel();
+      }
+
+      previousButton?.addEventListener("click", () => {
+        showSlide(activeIndex - 1);
+        stopCarousel();
+        startCarousel();
+      });
+
+      nextButton?.addEventListener("click", () => {
+        showSlide(activeIndex + 1);
+        stopCarousel();
+        startCarousel();
+      });
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          showSlide(index);
+          stopCarousel();
+          startCarousel();
+        });
+      });
+
+      carousel.addEventListener("mouseenter", pauseCarousel);
+      carousel.addEventListener("mouseleave", resumeCarousel);
+      carousel.addEventListener("focusin", pauseCarousel);
+      carousel.addEventListener("focusout", (event) => {
+        if (!carousel.contains(event.relatedTarget)) {
+          resumeCarousel();
+        }
+      });
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          stopCarousel();
+        } else {
+          startCarousel();
+        }
+      });
+
+      if (typeof reducedMotion.addEventListener === "function") {
+        reducedMotion.addEventListener("change", () => {
+          if (reducedMotion.matches) {
+            stopCarousel();
+            showSlide(activeIndex);
+          } else {
+            startCarousel();
+          }
+        });
+      }
+
+      showSlide(activeIndex);
+      startCarousel();
+    });
+  }
+
+  function bindShieldRotators() {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    document.querySelectorAll("[data-shield-rotator]").forEach((rotator) => {
+      const items = Array.from(rotator.querySelectorAll("span"));
+      const interval = Math.max(Number(rotator.dataset.interval || 4000), 1400);
+      let activeIndex = 0;
+      let timerId = null;
+
+      if (!items.length) {
+        return;
+      }
+
+      function showItem(index) {
+        activeIndex = (index + items.length) % items.length;
+        items.forEach((item, itemIndex) => {
+          item.classList.toggle("is-active", itemIndex === activeIndex);
+        });
+      }
+
+      function stop() {
+        if (!timerId) {
+          return;
+        }
+
+        window.clearInterval(timerId);
+        timerId = null;
+      }
+
+      function start() {
+        if (items.length < 2 || reducedMotion.matches || timerId) {
+          return;
+        }
+
+        timerId = window.setInterval(() => showItem(activeIndex + 1), interval);
+      }
+
+      function handleMotionPreferenceChange() {
+        stop();
+        if (reducedMotion.matches) {
+          showItem(0);
+        } else {
+          start();
+        }
+      }
+
+      rotator.classList.add("is-js-ready");
+      showItem(0);
+      start();
+
+      rotator.addEventListener("mouseenter", stop);
+      rotator.addEventListener("mouseleave", start);
+      rotator.addEventListener("focusin", stop);
+      rotator.addEventListener("focusout", (event) => {
+        if (!rotator.contains(event.relatedTarget)) {
+          start();
+        }
+      });
+
+      if (typeof reducedMotion.addEventListener === "function") {
+        reducedMotion.addEventListener("change", handleMotionPreferenceChange);
+      } else if (typeof reducedMotion.addListener === "function") {
+        reducedMotion.addListener(handleMotionPreferenceChange);
+      }
+    });
+  }
+
+  function bindProjectGallery() {
+    const galleries = document.querySelectorAll("[data-project-gallery]");
+
+    if (!galleries.length) {
+      return;
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    galleries.forEach((gallery) => {
+      const viewport = gallery.querySelector(".project-gallery-viewport");
+      const track = gallery.querySelector(".project-gallery-track");
+      const previousButton = gallery.querySelector("[data-project-gallery-prev]");
+      const nextButton = gallery.querySelector("[data-project-gallery-next]");
+
+      if (!viewport || !track || track.children.length <= 1) {
+        return;
+      }
+
+      const originals = Array.from(track.children);
+      originals.forEach((item) => {
+        const clone = item.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        track.appendChild(clone);
+      });
+
+      let position = 0;
+      let loopWidth = 0;
+      let previousTimestamp = null;
+      let frameId = null;
+      let resumeTimeoutId = null;
+      let isPaused = false;
+      const speed = 34;
+
+      function measureLoop() {
+        const styles = window.getComputedStyle(track);
+        const gap = parseFloat(styles.columnGap || styles.gap || "0") || 0;
+        loopWidth = originals.reduce((sum, item) => sum + item.getBoundingClientRect().width, 0) + gap * originals.length;
+      }
+
+      function setPosition(value) {
+        if (!loopWidth) {
+          measureLoop();
+        }
+
+        position = value;
+
+        while (position <= -loopWidth) {
+          position += loopWidth;
+        }
+
+        while (position > 0) {
+          position -= loopWidth;
+        }
+
+        track.style.transform = `translate3d(${position}px, 0, 0)`;
+      }
+
+      function stopLoop() {
+        if (frameId) {
+          window.cancelAnimationFrame(frameId);
+          frameId = null;
+        }
+
+        previousTimestamp = null;
+      }
+
+      function tick(timestamp) {
+        if (isPaused || reducedMotion.matches) {
+          stopLoop();
+          return;
+        }
+
+        if (previousTimestamp === null) {
+          previousTimestamp = timestamp;
+        }
+
+        const elapsed = timestamp - previousTimestamp;
+        previousTimestamp = timestamp;
+        setPosition(position - (speed * elapsed) / 1000);
+        frameId = window.requestAnimationFrame(tick);
+      }
+
+      function startLoop() {
+        if (frameId || isPaused || reducedMotion.matches) {
+          return;
+        }
+
+        frameId = window.requestAnimationFrame(tick);
+      }
+
+      function pauseLoop() {
+        isPaused = true;
+        gallery.classList.add("is-paused");
+        stopLoop();
+      }
+
+      function resumeLoop() {
+        if (resumeTimeoutId) {
+          window.clearTimeout(resumeTimeoutId);
+          resumeTimeoutId = null;
+        }
+
+        isPaused = false;
+        gallery.classList.remove("is-paused");
+        startLoop();
+      }
+
+      function getManualStep() {
+        const firstItem = originals[0];
+
+        if (!firstItem) {
+          return viewport.clientWidth;
+        }
+
+        const styles = window.getComputedStyle(track);
+        const gap = parseFloat(styles.columnGap || styles.gap || "0") || 0;
+        return firstItem.getBoundingClientRect().width + gap;
+      }
+
+      function moveBy(direction) {
+        pauseLoop();
+        setPosition(position - direction * getManualStep());
+        if (resumeTimeoutId) {
+          window.clearTimeout(resumeTimeoutId);
+        }
+        resumeTimeoutId = window.setTimeout(resumeLoop, 1800);
+      }
+
+      previousButton?.addEventListener("click", () => moveBy(-1));
+      nextButton?.addEventListener("click", () => moveBy(1));
+      gallery.addEventListener("mouseenter", pauseLoop);
+      gallery.addEventListener("mouseleave", resumeLoop);
+      gallery.addEventListener("focusin", pauseLoop);
+      gallery.addEventListener("focusout", (event) => {
+        if (!gallery.contains(event.relatedTarget)) {
+          resumeLoop();
+        }
+      });
+      gallery.addEventListener("touchstart", pauseLoop, { passive: true });
+      gallery.addEventListener("touchend", resumeLoop);
+
+      window.addEventListener("resize", () => {
+        measureLoop();
+        setPosition(position);
+      });
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          stopLoop();
+        } else {
+          startLoop();
+        }
+      });
+
+      if (typeof reducedMotion.addEventListener === "function") {
+        reducedMotion.addEventListener("change", () => {
+          if (reducedMotion.matches) {
+            stopLoop();
+            setPosition(0);
+          } else {
+            startLoop();
+          }
+        });
+      }
+
+      measureLoop();
+      gallery.classList.add("is-ready");
+      setPosition(0);
+      startLoop();
+    });
+  }
+
+  document.querySelectorAll("[data-component='site-header']").forEach(renderHeader);
+  document.querySelectorAll("[data-component='site-footer']").forEach(renderFooter);
+  bindNavigation();
+  bindDropdowns();
+  bindHeaderScrollState();
+  bindRevealAnimation();
+  bindContactForm();
+  bindConfirmationPage();
+  bindCarousels();
+  bindServiceCarousels();
+  bindShieldRotators();
+  bindProjectGallery();
+})();

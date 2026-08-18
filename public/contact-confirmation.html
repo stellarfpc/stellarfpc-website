@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Confirm whether your StellarFPC consultation request email was sent successfully.">
+    <title>Email Confirmation | StellarFPC</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/main.js" defer></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6QYTV65LMD"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-6QYTV65LMD');
+gtag('config', 'AW-18306917629');
+</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div data-component="site-header"></div>
+
+    <main id="main" class="confirmation-page">
+      <section class="confirmation-section" aria-labelledby="page-title">
+        <div class="confirmation-panel">
+          <p class="eyebrow">Email Confirmation</p>
+          <h1 id="page-title">Did your email send successfully?</h1>
+          <p>Please confirm whether your email app successfully sent the consultation request to StellarFPC.</p>
+
+          <div class="confirmation-actions">
+            <button class="button button-primary" type="button" data-confirmation-yes>Yes, it was sent</button>
+            <a class="button button-secondary" href="contact.html">No, return to contact form</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="confirmation-dialog" role="dialog" aria-modal="true" aria-labelledby="confirmation-dialog-title" hidden data-confirmation-dialog>
+        <div class="confirmation-dialog__panel">
+          <h2 id="confirmation-dialog-title">Thank you for choosing STELLAR FIRE.</h2>
+          <p>We will reply to your email as soon as possible to discuss your needs.</p>
+          <button class="button button-primary" type="button" data-confirmation-close>Close</button>
+        </div>
+      </div>
+    </main>
+
+    <div data-component="site-footer"></div>
+  </body>
+</html>

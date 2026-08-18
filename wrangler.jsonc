@@ -1,13 +1,14 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "stellarfpc-website",
-  "compatibility_date": "2026-06-29",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-08-18",
   "workers_dev": true,
-  "routes": [
-    "stellarfpc.ca/*",
-    "www.stellarfpc.ca/*"
-  ],
   "assets": {
-    "directory": "./"
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*"
+    ]
   }
 }

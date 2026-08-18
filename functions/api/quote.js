@@ -177,9 +177,8 @@ async function sendEmail({ env, fields, submittedAt, clientIp }) {
   return true;
 }
 
-export async function onRequestPost(context) {
+export async function handleQuoteRequest(request, env) {
   try {
-    const { request, env } = context;
     const missingEnv = ["TURNSTILE_SECRET_KEY", "CF_ACCOUNT_ID", "CF_EMAIL_API_TOKEN", "QUOTE_EMAIL_TO", "QUOTE_EMAIL_FROM"].filter((key) => !env[key]);
 
     if (missingEnv.length) {
@@ -221,6 +220,10 @@ export async function onRequestPost(context) {
     console.error("Quote form request failed", { message: error && error.message });
     return jsonResponse({ success: false, error: "Could not submit request" }, 500);
   }
+}
+
+export async function onRequestPost(context) {
+  return handleQuoteRequest(context.request, context.env);
 }
 
 export async function onRequest(context) {
