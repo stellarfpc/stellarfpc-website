@@ -23,7 +23,9 @@ if (sessionStorage.getItem("stellar_quote_submitted") === "1") {
   sessionStorage.removeItem("stellar_quote_submitted");
 
   if (typeof gtag === "function") {
-    gtag("event", "ads_conversion_Request_quote_1");
+    gtag('event', 'conversion', {
+      'send_to': 'AW-18306917629/BjjzCPKin-McEP3JtZ1E'
+    });
   }
 }
 </script>
