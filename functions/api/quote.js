@@ -147,10 +147,10 @@ function buildEmail({ fields, submittedAt, clientIp }) {
 
 async function sendEmail({ env, fields, submittedAt, clientIp }) {
   const email = buildEmail({ fields, submittedAt, clientIp });
-  const response = await fetch(`https://api.cloudflare.com/client/v4/accounts/${env.CF_ACCOUNT_ID}/email/sending/send`, {
+  const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${env.CF_EMAIL_API_TOKEN}`,
+      Authorization: `Bearer ${env.RESEND_API_KEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -165,11 +165,11 @@ async function sendEmail({ env, fields, submittedAt, clientIp }) {
 
   const result = await response.json().catch(() => null);
 
-  if (!response.ok || !result || result.success !== true) {
-    console.error("Cloudflare Email Service send failed", {
+  if (!response.ok || !result || !result.id) {
+    console.error("Resend email send failed", {
       status: response.status,
-      success: result && result.success,
-      errors: result && result.errors,
+      name: result && result.name,
+      message: result && result.message,
     });
     return false;
   }
@@ -179,7 +179,7 @@ async function sendEmail({ env, fields, submittedAt, clientIp }) {
 
 export async function handleQuoteRequest(request, env) {
   try {
-    const missingEnv = ["TURNSTILE_SECRET_KEY", "CF_ACCOUNT_ID", "CF_EMAIL_API_TOKEN", "QUOTE_EMAIL_TO", "QUOTE_EMAIL_FROM"].filter((key) => !env[key]);
+    const missingEnv = ["TURNSTILE_SECRET_KEY", "RESEND_API_KEY", "QUOTE_EMAIL_TO", "QUOTE_EMAIL_FROM"].filter((key) => !env[key]);
 
     if (missingEnv.length) {
       console.error("Quote form is missing required environment configuration", { missingEnv });
