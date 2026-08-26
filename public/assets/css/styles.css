@@ -6464,22 +6464,14 @@ font-weight:700;
   max-width: none;
   margin: clamp(16px, 3vw, 34px) calc(50% - 50vw) 0;
   padding: 0;
-  overflow: hidden;
   background: #fff;
   line-height: 0;
-}
-
-.home-city-coverage__frame {
-  overflow: hidden;
-  background: #fff;
 }
 
 .home-city-coverage__image {
   display: block;
   width: 100%;
   height: auto;
-  margin-top: -26%;
-  margin-bottom: -24%;
   object-fit: contain;
 }
 
