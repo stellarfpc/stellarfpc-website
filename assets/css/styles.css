@@ -82,10 +82,10 @@ svg {
 
 .page-with-side-art {
   display: grid;
-  grid-template-columns: minmax(150px, 210px) minmax(0, 1fr) minmax(150px, 210px);
-  gap: clamp(18px, 2vw, 28px);
+  grid-template-columns: minmax(230px, 300px) minmax(0, 1fr) minmax(230px, 300px);
+  gap: clamp(20px, 2.4vw, 36px);
   align-items: stretch;
-  width: min(96vw, 1600px);
+  width: min(98vw, 1800px);
   margin-inline: auto;
 }
 
@@ -6460,9 +6460,17 @@ font-weight:700;
 }
 
 .home-city-coverage {
-  width: min(96vw, 1650px);
-  margin: clamp(30px, 5vw, 60px) auto 0;
-  padding: 30px 0 10px;
+  width: 100vw;
+  max-width: none;
+  margin: clamp(16px, 3vw, 34px) calc(50% - 50vw) 0;
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+  line-height: 0;
+}
+
+.home-city-coverage__frame {
+  overflow: hidden;
   background: #fff;
 }
 
@@ -6470,6 +6478,8 @@ font-weight:700;
   display: block;
   width: 100%;
   height: auto;
+  margin-top: -26%;
+  margin-bottom: -24%;
   object-fit: contain;
 }
 
