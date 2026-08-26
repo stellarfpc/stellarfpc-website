@@ -6462,7 +6462,7 @@ font-weight:700;
 .home-city-coverage {
   width: 100vw;
   max-width: none;
-  margin: clamp(16px, 3vw, 34px) calc(50% - 50vw) 0;
+  margin: 2px calc(50% - 50vw) 0;
   padding: 0;
   background: #fff;
   line-height: 0;
