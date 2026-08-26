@@ -80,6 +80,44 @@ svg {
   max-width: 100%;
 }
 
+.page-with-side-art {
+  display: grid;
+  grid-template-columns: minmax(150px, 210px) minmax(0, 1fr) minmax(150px, 210px);
+  gap: clamp(18px, 2vw, 28px);
+  align-items: stretch;
+  width: min(96vw, 1600px);
+  margin-inline: auto;
+}
+
+.page-with-side-art > .main-page-content {
+  width: 100%;
+  max-width: 1050px;
+  margin-inline: auto;
+  min-width: 0;
+}
+
+.side-art {
+  min-width: 0;
+}
+
+.side-art img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: top center;
+}
+
+@media (max-width: 1100px) {
+  .page-with-side-art {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .side-art {
+    display: none;
+  }
+}
+
 .skip-link {
   position: absolute;
   top: 0.75rem;
@@ -6421,19 +6459,18 @@ font-weight:700;
   overflow: visible;
 }
 
-.home-city-logos {
-  width: 100%;
-  margin-top: clamp(30px, 5vw, 60px);
-  overflow: hidden;
+.home-city-coverage {
+  width: min(96vw, 1650px);
+  margin: clamp(30px, 5vw, 60px) auto 0;
+  padding: 30px 0 10px;
   background: #fff;
 }
 
-.home-city-logos img {
+.home-city-coverage__image {
+  display: block;
   width: 100%;
-  min-height: clamp(96px, 13vw, 180px);
-  opacity: .7;
-  object-fit: cover;
-  object-position: center;
+  height: auto;
+  object-fit: contain;
 }
 
 .service-rail {
