@@ -6859,8 +6859,10 @@ font-weight:700;
   padding: clamp(28px, 4vw, 46px);
   margin: 0 auto clamp(38px, 5vw, 64px);
   overflow: hidden;
-  background: #fff;
-  border: 1px solid rgba(23, 59, 96, .14);
+  background:
+    linear-gradient(135deg, rgba(0, 87, 217, .12), rgba(255, 255, 255, .72) 42%, rgba(180, 32, 42, .06)),
+    #f8fbff;
+  border: 1px solid rgba(0, 87, 217, .16);
   border-radius: 18px;
   box-shadow: 0 24px 60px rgba(15, 35, 65, .12);
 }
@@ -6869,7 +6871,7 @@ font-weight:700;
   position: absolute;
   inset: 0 auto 0 0;
   width: 5px;
-  background: var(--stellar-red);
+  background: linear-gradient(180deg, var(--color-blue), var(--stellar-red));
   content: "";
 }
 
@@ -6911,7 +6913,7 @@ font-weight:700;
   min-width: 0;
   min-height: 100%;
   padding: 22px 24px;
-  background: #fff;
+  background: rgba(255, 255, 255, .88);
   border: 1px solid rgba(16, 70, 140, .12);
   border-radius: 16px;
   box-shadow: 0 12px 32px rgba(15, 35, 65, .07);
@@ -6928,7 +6930,7 @@ font-weight:700;
   display: block;
   min-height: 3.45rem;
   margin-bottom: 12px;
-  color: var(--stellar-navy);
+  color: var(--stellar-red);
   font-size: clamp(1.125rem, 1.5vw, 1.5rem);
   font-weight: 900;
   line-height: 1.15;
@@ -8497,76 +8499,5 @@ font-weight:700;
 
   .faq-answer {
     padding-right: 0;
-  }
-}
-
-/* Shared fire-protection background across every page. */
-body {
-  background-color: #f7f5f3;
-  background-image:
-    url('../images/fire-protection-shield.svg'),
-    url('../images/fire-protection-shield.svg'),
-    radial-gradient(ellipse at 0 12%, rgba(180, 32, 42, .07), transparent 42%),
-    radial-gradient(ellipse at 100% 90%, rgba(55, 62, 70, .06), transparent 42%);
-  background-position: left -90px top 150px, right -70px bottom 30px, center, center;
-  background-size: 360px 440px, 360px 440px, 100% 100%, 100% 100%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
-#main,
-#main .service-landing-hero,
-#main .service-detail-section,
-#main .service-overview-section,
-#main .contact-main-section,
-#main .simple-about-section,
-#main .project-gallery-section,
-#main .project-directory-section {
-  background: transparent;
-}
-
-/* Keep the pattern outside the main reading and interaction surfaces. */
-#main .new-client-promo,
-#main .fsp-info-projects-section {
-  background: #fff;
-}
-
-#main .fsp-info-projects-section {
-  padding-inline: clamp(20px, 3vw, 36px);
-  border: 1px solid var(--color-border);
-  border-radius: 18px;
-}
-
-#main .faq-container {
-  padding: clamp(22px, 4vw, 42px);
-  background: #fff;
-  border: 1px solid var(--color-border);
-  border-radius: 16px;
-  box-shadow: var(--shadow-subtle);
-}
-
-/* Replace the competing decorative side illustrations with the shared pattern. */
-#main .page-with-side-art {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-#main .side-art,
-#main .page-city-backgrounds {
-  display: none;
-}
-
-@media (max-width: 600px) {
-  body {
-    background-attachment: scroll;
-    background-position: left -100px top 130px, right -100px bottom 40px, center, center;
-    background-size: 240px 294px, 240px 294px, 100% 100%, 100% 100%;
-  }
-}
-
-@media (min-width: 1001px) {
-  .home-content-main {
-    width: min(calc(100% - 340px), 900px);
-    margin-left: max(290px, calc((100% - 900px) / 2));
-    margin-right: auto;
   }
 }
