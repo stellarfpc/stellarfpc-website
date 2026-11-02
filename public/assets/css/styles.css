@@ -6859,10 +6859,15 @@ font-weight:700;
   padding: clamp(28px, 4vw, 46px);
   margin: 0 auto clamp(38px, 5vw, 64px);
   overflow: hidden;
-  background:
-    linear-gradient(135deg, rgba(0, 87, 217, .12), rgba(255, 255, 255, .72) 42%, rgba(180, 32, 42, .06)),
-    #f8fbff;
-  border: 1px solid rgba(0, 87, 217, .16);
+  background-color: #f4f7fa;
+  background-image:
+    linear-gradient(90deg, transparent, #f4f7fa 34%, #f4f7fa 66%, transparent),
+    url('../images/fire-system-blueprint.svg'),
+    url('../images/fire-system-blueprint.svg');
+  background-position: center, right top, left bottom;
+  background-size: 100% 100%, 360px 480px, 360px 480px;
+  background-repeat: no-repeat;
+  border: 1px solid rgba(23, 59, 96, .14);
   border-radius: 18px;
   box-shadow: 0 24px 60px rgba(15, 35, 65, .12);
 }
@@ -6871,7 +6876,7 @@ font-weight:700;
   position: absolute;
   inset: 0 auto 0 0;
   width: 5px;
-  background: linear-gradient(180deg, var(--color-blue), var(--stellar-red));
+  background: var(--stellar-red);
   content: "";
 }
 
@@ -6913,7 +6918,7 @@ font-weight:700;
   min-width: 0;
   min-height: 100%;
   padding: 22px 24px;
-  background: rgba(255, 255, 255, .88);
+  background: #fff;
   border: 1px solid rgba(16, 70, 140, .12);
   border-radius: 16px;
   box-shadow: 0 12px 32px rgba(15, 35, 65, .07);
@@ -6930,7 +6935,7 @@ font-weight:700;
   display: block;
   min-height: 3.45rem;
   margin-bottom: 12px;
-  color: var(--stellar-red);
+  color: var(--stellar-navy);
   font-size: clamp(1.125rem, 1.5vw, 1.5rem);
   font-weight: 900;
   line-height: 1.15;
