@@ -8501,3 +8501,50 @@ font-weight:700;
     padding-right: 0;
   }
 }
+
+/* Abstract red-and-charcoal background for interior pages only. */
+body:has(> #main:not(.simple-home)) {
+  background-color: #f6f5f3;
+  background-image:
+    url('../images/abstract-fire-background.svg'),
+    radial-gradient(ellipse at 8% 15%, rgba(180, 32, 42, .045), transparent 45%);
+  background-position: center, center;
+  background-size: cover, 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#main:not(.simple-home),
+#main:not(.simple-home) .service-landing-hero,
+#main:not(.simple-home) .service-detail-section,
+#main:not(.simple-home) .service-overview-section,
+#main:not(.simple-home) .contact-main-section,
+#main:not(.simple-home) .simple-about-section,
+#main:not(.simple-home) .project-gallery-section,
+#main:not(.simple-home) .project-directory-section {
+  background: transparent;
+}
+
+#main:not(.simple-home) .faq-container {
+  padding: clamp(22px, 4vw, 42px);
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-subtle);
+}
+
+#main:not(.simple-home) .page-with-side-art {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+#main:not(.simple-home) .side-art,
+#main:not(.simple-home) .page-city-backgrounds {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  body:has(> #main:not(.simple-home)) {
+    background-attachment: scroll;
+    background-size: auto 850px, 100% 100%;
+  }
+}
