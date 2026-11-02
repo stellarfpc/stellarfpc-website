@@ -8506,3 +8506,72 @@ font-weight:700;
     padding-right: 0;
   }
 }
+
+/* Shared fire-protection background across every page. */
+body {
+  background-color: #edf3f8;
+  background-image:
+    linear-gradient(90deg, transparent, rgba(237, 243, 248, .94) 28%, rgba(237, 243, 248, .94) 72%, transparent),
+    url('../images/fire-system-blueprint.svg?v=2'),
+    url('../images/fire-system-blueprint.svg?v=2');
+  background-position: center top, left top, right 220px;
+  background-size: 100% 100%, 420px 560px, 420px 560px;
+  background-repeat: no-repeat, repeat-y, repeat-y;
+  background-attachment: fixed;
+}
+
+#main,
+#main .service-landing-hero,
+#main .service-detail-section,
+#main .service-overview-section,
+#main .contact-main-section,
+#main .simple-about-section,
+#main .project-gallery-section,
+#main .project-directory-section {
+  background: transparent;
+}
+
+/* Keep the pattern outside the main reading and interaction surfaces. */
+#main .new-client-promo,
+#main .fsp-info-projects-section {
+  background: #fff;
+}
+
+#main .fsp-info-projects-section {
+  padding-inline: clamp(20px, 3vw, 36px);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+}
+
+#main .faq-container {
+  padding: clamp(22px, 4vw, 42px);
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-subtle);
+}
+
+/* Replace the competing decorative side illustrations with the shared pattern. */
+#main .page-with-side-art {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+#main .side-art,
+#main .page-city-backgrounds {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  body {
+    background-attachment: scroll;
+    background-size: 100% 100%, 270px 360px, 270px 360px;
+  }
+}
+
+@media (min-width: 1001px) {
+  .home-content-main {
+    width: min(calc(100% - 340px), 900px);
+    margin-left: max(290px, calc((100% - 900px) / 2));
+    margin-right: auto;
+  }
+}
