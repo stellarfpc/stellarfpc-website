@@ -6939,6 +6939,12 @@ font-weight:700;
   color: var(--stellar-blue, var(--color-blue));
 }
 
+.promo-offer__value--referral {
+  font-size: clamp(1.25rem, 2vw, 2rem);
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
 .promo-offer strong {
   display: block;
   color: var(--stellar-navy);
