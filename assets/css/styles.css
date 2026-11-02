@@ -6910,6 +6910,7 @@ font-weight:700;
 
 .promo-offer {
   position: relative;
+  min-width: 0;
   min-height: 100%;
   padding: 22px 24px;
   background: rgba(255, 255, 255, .88);
@@ -6927,26 +6928,25 @@ font-weight:700;
 
 .promo-offer__value {
   display: block;
+  min-height: 3.45rem;
   margin-bottom: 12px;
   color: var(--stellar-red);
-  font-size: clamp(1.9rem, 2.5vw, 3rem);
+  font-size: clamp(1.125rem, 1.5vw, 1.5rem);
   font-weight: 900;
-  line-height: 1;
+  line-height: 1.15;
   letter-spacing: -.02em;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 
 .promo-offer__value--blue {
   color: var(--stellar-blue, var(--color-blue));
 }
 
-.promo-offer__value--referral {
-  font-size: clamp(1.25rem, 2vw, 2rem);
-  line-height: 1.15;
-  overflow-wrap: anywhere;
-}
 
 .promo-offer strong {
   display: block;
+  min-height: 2.6em;
   color: var(--stellar-navy);
   font-size: 1.02rem;
   line-height: 1.3;
